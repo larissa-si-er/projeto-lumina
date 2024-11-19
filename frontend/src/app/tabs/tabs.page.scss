@@ -1,0 +1,105 @@
+// ion-tab-bar {
+//     background-color: #f8f8f8; /* Cor de fundo das abas */
+//     padding: 10px;
+//     border-radius: 30px;
+//     display: flex;
+//     justify-content: space-around;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   }
+  
+//   ion-tab-button {
+//     --background: transparent;
+//     --color-selected: #e91e63; /* Cor do ícone selecionado */
+//     --color: #000000; /* Cor padrão do ícone */
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     position: relative;
+//     padding: 0;
+//   }
+  
+//   ion-tab-button.ion-selected {
+//     --background: transparent;
+//     color: yellow;
+//     // background-color: #1ee9b0;
+//   }
+  
+//   ion-tab-button.ion-selected .tab-icon {
+//     border-radius: 50%;
+//     padding: 12px;
+//     transition: background-color 0.3s ease;
+//   }
+  
+//   .tab-icon {
+//     width: 50px;
+//     height: 50px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     position: relative;
+//     background-color: #1ee9b0;
+//     border-radius: 50%;
+//   }
+
+  
+//   ion-tab-button.ion-selected .tab-icon ion-icon {
+//     color: #3d1ee9; /* Cor do ícone quando selecionado */
+//   }
+  
+//   ion-icon {
+//     font-size: 24px;
+//   }
+  
+ion-tab-bar {
+    background-color: #f8f8f8; /* Cor de fundo das abas */
+    padding: 10px;
+    border-radius: 40px 40px 0px 0px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ion-tab-button {
+    --background: transparent; /* Cor de fundo padrão */
+    --color-selected: #e91e63; /* Cor do ícone selecionado */
+    --color: #000000; /* Cor padrão do ícone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0;
+}
+
+// .tab-icon.active {
+//     background-color: #1ee9b0; 
+//     color: yellow; 
+// }
+
+.tab-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: transparent; /* Fundo padrão da tab-icon */
+    border-radius: 50%;
+    background-color: #eaeaea;
+
+}
+
+.tab-icon:hover{
+    // background-color: #ffe7f8;
+    background-color: #c6bcc3;
+    color: #e85989;
+}
+
+// ion-tab-button.active .tab-icon ion-icon {
+//     color: #3d1ee9; /* Cor do ícone quando selecionado */
+// }
+
+ion-icon {
+    font-size: 24px;
+}
+
+

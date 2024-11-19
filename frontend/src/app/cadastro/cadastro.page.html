@@ -1,0 +1,60 @@
+<ion-header></ion-header>
+
+<ion-content class="ion-padding">
+  <div class="icon-container">
+      <img src="../../assets/img/logo-icon.png" class="logo" alt="" srcset=""> 
+  </div>
+
+  <div class="title-container">
+    <h2>CADASTRAR-SE</h2>
+  </div>
+
+  <form>
+    <ion-item>
+      <ion-label position="floating">Digite seu nome</ion-label>
+      <ion-input type="text"></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite seu email</ion-label>
+      <ion-input type="email"></ion-input>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tipo de usuário</ion-label>
+      <ion-select>
+        <ion-select-option value="volunteer">Voluntário</ion-select-option>
+        <ion-select-option value="organizer">Organizador</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite sua senha</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirme sua senha</ion-label>
+      <ion-input type="password"></ion-input>
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" class="btn-cadastrar">Cadastrar</ion-button>
+
+    <div class="separator">OU</div>
+    <ion-button expand="full" color="light" disabled>Entrar com Google</ion-button>
+
+    <ion-text class="text-footer">
+      <a href="/login">JÁ POSSUO UMA CONTA</a>
+    </ion-text>
+
+  </form>
+
+</ion-content>

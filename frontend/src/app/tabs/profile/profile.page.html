@@ -1,0 +1,34 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <img src="../../assets/img/logo-icon.png" alt="logo-icon" class="logo-icon" slot="start">
+    <img src="../../assets/img/logo-letter.png" alt="logo-letter" class="logo-letter">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content">
+  <div class="profile-header">
+    <ion-avatar class="profile-avatar">
+      <img src="../../../assets/img/avatar.png" alt="Meu perfil">
+    </ion-avatar>
+    <h2>Olá, (nome)!</h2>
+  </div>
+
+  <div class="profile-info">
+    <ion-item lines="full">
+      <ion-label>Informações pessoais</ion-label>
+      <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label>Meu endereço</ion-label>
+      <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Notificações</ion-label>
+      <ion-toggle slot="end" checked></ion-toggle>
+    </ion-item>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,75 @@
+.custom-header {
+    --background: #f8f8f8;
+  }
+  
+  .image-container {
+    position: relative;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    opacity: 0.3; 
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .overlay-card {
+    width: 100px; 
+    height: 100px; 
+    margin: 0 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white; 
+    padding: 1px 5px 5px;
+  }
+  
+  .overlay-card ion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .details-card {
+    margin-top: 100px;
+    padding: 15px;
+    border-radius: 15px;
+  }
+  
+  .details-card h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .details-card p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .details-card ul {
+    padding-left: 20px;
+  }
+  
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .skills ion-chip {
+    margin-right: 8px;
+    margin-top: 5px;
+  }
+  

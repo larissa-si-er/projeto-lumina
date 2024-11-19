@@ -1,0 +1,302 @@
+.splash-screen-1,
+.splash-screen-2 {
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: opacity 0.5s ease-in-out;
+}
+
+// .splash-screen-1 {
+//   opacity: 1;
+// }
+
+// .splash-screen-2 {
+//   opacity: 0;
+// }
+
+.logo-splash-one{
+    width: 110px;
+    position: absolute;
+    top: 20%;
+    // left: 50%;
+    // transform: translateY(20px); /* Pode ajustar para mover um pouco mais para cima ou para baixo */
+}
+
+.plate{
+    width: 190px;
+    transform: rotate(-40deg);
+    position: absolute;
+    right: -30px;  /* Colado à direita da tela */
+    bottom: 80px; /* Distância da parte de baixo da tela */
+    // transform: translateY(20px); /* Pode ajustar para mover um pouco mais para cima ou para baixo */
+}
+
+.footer{
+    position: absolute;
+    bottom: 20px; 
+}
+
+.bubbles {
+  display: flex;
+  gap: 10px;
+//   position: absolute;
+  top: 40%;
+}
+
+.bubbles-top{
+    top: 10%;
+    left: 5px;
+    position: absolute;
+}
+
+.bubbles-bottom{
+    top: 30%;
+    right: 5px;
+    position: absolute;
+}
+
+.bubble {
+  background-color: #e91e63;
+  border-radius: 50%;
+  animation: bounce 2s infinite;
+
+  width: 10px; /* Tamanho inicial */
+  height: 10px; /* Tamanho inicial */
+  background-color: #cd1687;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out; /* Adiciona a animação */
+  position: relative;
+}
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1); 
+    }
+    50% {
+      transform: scale(1.5); 
+    }
+  }
+
+
+
+/* Bolha 1 */
+.bubble:nth-child(1) {
+    width: 7px;
+    height: 7px;
+    top: 80px;
+    left: 0px;
+  }
+  
+  /* Bolha 2 */
+  .bubble:nth-child(2) {
+    width: 9px;
+    height: 9px;
+    top: 90px;
+    left: 10px;
+  }
+  
+  /* Bolha 3 */
+  .bubble:nth-child(3) {
+    width: 4px;
+    height: 4px;
+    top: 70px;
+    left: 20px;
+  }
+  
+  /* Bolha 4 */
+  .bubble:nth-child(4) {
+    width: 13px;
+    height: 13px;
+    top: 50px;
+    left: 30px;
+  }
+  
+  /* Bolha 5 */
+  .bubble:nth-child(5) {
+    width: 7px;
+    height: 7px;
+    top: 30px;
+    left: 40px;
+    }
+  
+  /* Bolha 6 */
+  .bubble:nth-child(6) {
+    width: 7px;
+    height: 7px;
+    top: 10px;
+    left: 50px;
+  }
+  
+  /* Bolha 7 */
+  .bubble:nth-child(7) {
+    width: 17px;
+    height: 17px;
+    top: 0px;
+    left: 60px;
+  }
+  
+  /* Bolha 8 */
+  .bubble:nth-child(8) {
+    top: 10px;
+    left: 70px;
+  }
+  
+  /* Bolha 9 */
+  .bubble:nth-child(9) {
+    top: 0px;
+    left: 80px;
+  }
+
+
+
+
+
+
+
+//   SEGUNDO SPLASH
+
+.logo-splash-two{
+    width: 110px;
+    margin-bottom: 10%;
+}
+.logo-letter{
+    width: 250px;
+    margin: 0%;
+    padding: 0%;
+}
+
+.content-slogan{
+  margin-bottom: 30%;
+}
+
+
+.loading-balls {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.loading-ball {
+  width: 10px;
+  height: 10px;
+  background-color: #e91e63;
+  border-radius: 50%;
+  animation: load 1.5s infinite ease-in-out;
+}
+
+@keyframes load {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.slogan{
+  font-weight: 600;
+  margin: 0;
+}
+.s-one{
+  margin-right: 45%;
+  margin-bottom: -5%;
+}
+.s-two{
+  margin-left: 60%;
+  margin-top: -5%;
+}
+.highlight-one {
+  color: #e91e63; 
+}
+.highlight-two {
+  color: #E9DE48; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+  .loading-balls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .loading-ball {
+    width: 10px; /* Tamanho inicial */
+    height: 10px; /* Tamanho inicial */
+    background-color: #e91e63;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite ease-in-out; /* Animação base para todas as bolinhas */
+  }
+  
+  /* Bolinha 1 */
+  .loading-ball:nth-child(1) {
+    animation-duration: 1.2s; /* Tempo de animação diferente */
+    background-color: #e91e63; /* Cor personalizada */
+    animation-name: pulse-ball-1; /* Animação personalizada */
+  }
+  
+  /* Bolinha 2 */
+  .loading-ball:nth-child(2) {
+    animation-duration: 1.5s; /* Tempo de animação diferente */
+    background-color: #ff4081; /* Cor personalizada */
+    animation-name: pulse-ball-2; /* Animação personalizada */
+  }
+  
+  /* Bolinha 3 */
+  .loading-ball:nth-child(3) {
+    animation-duration: 1.8s; /* Tempo de animação diferente */
+    background-color: #f50057; /* Cor personalizada */
+    animation-name: pulse-ball-3; /* Animação personalizada */
+  }
+  
+  /* Animação da bolinha 1 */
+  @keyframes pulse-ball-1 {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4); /* Aumenta a bolinha 1 um pouco menos */
+    }
+  }
+  
+  /* Animação da bolinha 2 */
+  @keyframes pulse-ball-2 {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.6); /* Aumenta mais a bolinha 2 */
+    }
+  }
+  
+  /* Animação da bolinha 3 */
+  @keyframes pulse-ball-3 {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.8); /* Aumenta ainda mais a bolinha 3 */
+    }
+  }
+  
+  

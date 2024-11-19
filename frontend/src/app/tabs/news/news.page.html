@@ -1,0 +1,27 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <img src="../../assets/img/logo-icon.png" alt="logo-icon" class="logo-icon" slot="start">
+    <img src="../../assets/img/logo-letter.png" alt="logo-letter" class="logo-letter">
+    <!-- <ion-progress-bar type="indeterminate"></ion-progress-bar> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="news-content">
+
+  <div class="search-bar">
+    <ion-searchbar placeholder="Pesquisar..." [(ngModel)]="searchTerm" (ionInput)="fetchNews()" class="search-input"></ion-searchbar>
+  </div>
+
+  <ion-list class="news-list">
+    <ion-item lines="none" *ngFor="let article of news">
+      <ion-card class="news-card">
+        <ion-img [src]="article.urlToImage || 'assets/placeholder.jpg'"></ion-img>
+        <ion-card-content>
+          <ion-card-title>{{ article.title }}</ion-card-title>
+          <p>{{ article.publishedAt | date:'dd/MM/yyyy' }}</p>
+          <p>{{ article.description || 'Descrição indisponível.' }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

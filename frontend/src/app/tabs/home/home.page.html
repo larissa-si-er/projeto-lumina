@@ -1,0 +1,79 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <img src="../../assets/img/logo-icon.png" alt="logo-icon" class="logo-icon" slot="start">
+    <img src="../../assets/img/logo-letter.png" alt="logo-letter" class="logo-letter">
+    <!-- <ion-progress-bar type="indeterminate"></ion-progress-bar> -->
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content [fullscreen]="true" class="ion-padding">
+</ion-content> -->
+
+<ion-content>
+  <!-- Barra de Pesquisa -->
+  <div class="search-bar">
+    <ion-icon name="location-outline" class="icon"></ion-icon>
+    <ion-searchbar placeholder="Pesquisar..." class="search-input"></ion-searchbar>
+    <ion-icon name="funnel-outline" class="icon"></ion-icon>
+  </div>
+
+  <!-- Seção Notícias -->
+  <h2 class="section-title">Notícias</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="news-card">
+          <ion-img src="../../../assets/img/news1.png"></ion-img>
+          <ion-card-content class="news-content">
+            <p class="news-date">18/08/2021</p>
+            <p class="news-text">Preocupação ambiental em SP</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="news-card">
+          <ion-img src="../../../assets/img/news2.png"></ion-img>
+          <ion-card-content class="news-content">
+            <p class="news-date">18/08/2021</p>
+            <p class="news-text">Preocupação ambiental em SP</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Seção Ações de Voluntariado -->
+  <h2 class="section-title">Ações do Voluntariado</h2>
+  <div class="filters">
+    <ion-button class="filter-button active">Todos</ion-button>
+    <ion-button class="filter-button">Recente</ion-button>
+  </div>
+
+  <!-- Card Voluntariado -->
+  <ion-card class="volunteer-card">
+    <ion-img src="../../../assets/img/imgcard.png" class="volunteer-img"></ion-img>
+    <ion-card-content>
+      <div class="volunteer-info">
+        <h3 class="volunteer-team">Equipe teste</h3>
+        <a routerLink="/volunteer-details" class="volunteer-link">+ Mais info.</a>
+      </div>
+      <p class="volunteer-action">Ação exemplo</p>
+
+      <div class="volunteer-slots">
+        <ion-item lines="none" class="volunteer-item">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Total: 20</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="volunteer-item">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          <ion-label>Disponível: 17</ion-label>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+
+
+
