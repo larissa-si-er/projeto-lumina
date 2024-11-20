@@ -24,16 +24,21 @@ export class UserRepository extends RepositoryFactory<
   //       },
   //     });
   //   }
+
+  // Criação de usuário com o Firebase UID
+  // async createWithFirebase(
+  //   dto: CreateUserDto & { firebaseUid: string },
+  // ): Promise<UserEntity> {
+  //   return this.create({
+  //     ...dto,
+  //     firebaseUid: dto.firebaseUid,
+  //   });
+  // }
+
+  // // Buscar por firebaseUid
+  // async findByFirebaseUid(firebaseUid: string): Promise<UserEntity | null> {
+  //   return this.prismaService.user.findUnique({
+  //     where: { firebaseUid },
+  //   });
+  // }
 }
-
-// import { Injectable } from '@nestjs/common';
-// import { RepositoryFactory } from 'src/common/factories/repository/repository.factory';
-// import { UserEntity } from 'src/domain/entities';
-// import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-
-// @Injectable()
-// export class UserRepository extends RepositoryFactory<UserEntity> {
-//   constructor(prismaService: PrismaService) {
-//     super(prismaService, 'user');
-//   }
-// }

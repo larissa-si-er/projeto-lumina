@@ -1,4 +1,4 @@
-<ion-header></ion-header>
+<!-- <ion-header></ion-header>
 
 <ion-content class="ion-padding">
   <div class="icon-container">
@@ -57,4 +57,68 @@
 
   </form>
 
+</ion-content> -->
+
+<ion-header></ion-header>
+
+<ion-content class="ion-padding">
+  <div class="icon-container">
+    <img src="../../assets/img/logo-icon.png" class="logo" alt="Logo" />
+  </div>
+
+  <div class="title-container">
+    <h2>CADASTRAR-SE</h2>
+  </div>
+
+  <form>
+    <ion-item>
+      <ion-label position="floating">Digite seu nome</ion-label>
+      <ion-input
+        [(ngModel)]="name"
+        name="name"
+        type="text"
+        required
+      ></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite seu email</ion-label>
+      <ion-input
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+      ></ion-input>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite sua senha</ion-label>
+      <ion-input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" class="btn-cadastrar" (click)="register()"
+      >Cadastrar</ion-button
+    >
+
+    <div class="separator">OU</div>
+    <ion-button expand="full" color="light" disabled
+      >Entrar com Google</ion-button
+    >
+
+    <ion-button
+      expand="full"
+      color="secondary"
+      class="text-footer"
+      routerLink="/login"
+      fill="clear"
+      >JÁ POSSUO UMA CONTA</ion-button
+    >
+  </form>
 </ion-content>

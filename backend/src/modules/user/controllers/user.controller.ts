@@ -13,7 +13,9 @@ export class UserController {
   }
 }
 
-// import { Body, Controller, Post } from '@nestjs/common';
+// import { Body, Controller, Post, Headers } from '@nestjs/common';
+// import { CreateUserDto } from 'src/domain/dtos';
+// import { UserEntity } from 'src/domain/entities';
 // import { UserService } from '../services/user.service';
 
 // @Controller('user')
@@ -21,7 +23,16 @@ export class UserController {
 //   constructor(private readonly userService: UserService) {}
 
 //   @Post()
-//   async createUser(@Body() data: any) {
-//     return this.userService.createUser(data);
+//   async createUser(
+//     @Body() createUserDto: CreateUserDto,
+//     @Headers('Authorization') authHeader: string, // Token JWT vem no cabeçalho
+//   ): Promise<UserEntity> {
+//     if (!authHeader) {
+//       throw new Error('Authorization header is missing');
+//     }
+
+//     const token = authHeader.split(' ')[1]; // Remove o "Bearer" do token
+
+//     return this.userService.create(createUserDto, token);
 //   }
 // }

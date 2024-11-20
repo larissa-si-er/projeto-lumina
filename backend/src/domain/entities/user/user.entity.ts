@@ -9,4 +9,5 @@ export class UserEntity implements User {
   email: string;
   totalHours: number;
   role: $Enums.userRole;
+  // firebaseUid: string; // Adicione esta propriedade
 }

@@ -69,25 +69,3 @@ export class RepositoryFactory<K, T = void, J = void> {
     return this.prismaService[this.model].deleteMany();
   }
 }
-
-// import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-
-// export class RepositoryFactory<T> {
-//   constructor(
-//     private readonly prismaService: PrismaService,
-//     private readonly model: string,
-//   ) {}
-
-//   async create(data: T) {
-//     const modelDelegate = this.prismaService[this.model];
-//     if (!modelDelegate || typeof modelDelegate.create !== 'function') {
-//       throw new Error(
-//         `Model ${this.model} is invalid or does not support 'create'`,
-//       );
-//     }
-
-//     return modelDelegate.create({ data });
-//   }
-
-//   // Outras operações genéricas (find, update, delete, etc.) podem ser adicionadas aqui
-// }

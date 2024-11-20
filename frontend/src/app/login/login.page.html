@@ -16,25 +16,44 @@
   <form>
     <ion-item>
       <ion-label position="floating">Digite seu email</ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
       <ion-icon slot="end" name="mail-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Digite sua senha</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+      ></ion-input>
       <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
     </ion-item>
 
-    <ion-button expand="full" class="btn-login" routerLink="/tabs">Entrar</ion-button>
+    <!-- <ion-button
+      expand="full"
+      class="btn-login"
+      routerLink="/tabs"
+      (click)="login()"
+      >Entrar</ion-button
+    > -->
+
+    <ion-button expand="full" class="btn-login" (click)="login()"
+      >Entrar</ion-button
+    >
 
     <div class="separator">OU</div>
-    <ion-button class="btn-google"  expand="full" color="light" disabled>Entrar com Google</ion-button>
+    <ion-button class="btn-google" expand="full" color="light" disabled
+      >Entrar com Google</ion-button
+    >
 
-<ion-text class="text-footer">
-  <a href="./cadastro">NÃO POSSUO UMA CONTA</a>
-</ion-text>
-
+    <ion-button
+      expand="full"
+      color="secondary"
+      class="text-footer"
+      routerLink="/cadastro"
+      fill="clear"
+      >NÃO POSSUO UMA CONTA</ion-button
+    >
   </form>
-
 </ion-content>

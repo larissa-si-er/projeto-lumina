@@ -18,46 +18,38 @@ export class UserService {
   }
 }
 
-// import { Injectable } from '@nestjs/common';
-// import { RepositoryFactory } from 'src/common/factories/repository/repository.factory';
-// import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-// import { Prisma, User } from '@prisma/client';
+// import { Injectable, UnauthorizedException } from '@nestjs/common';
+// import * as admin from 'firebase-admin'; // Firebase Admin SDK
+// import { CreateUserDto } from 'src/domain/dtos';
+// import { UserEntity } from 'src/domain/entities';
+// import { UserRepository } from '../repositories/user.repository';
 
 // @Injectable()
 // export class UserService {
-//   private userRepository: RepositoryFactory<User>;
+//   constructor(private readonly userRepository: UserRepository) {}
 
-//   constructor(private readonly prismaService: PrismaService) {
-//     this.userRepository = new RepositoryFactory<User>(prismaService, 'user');
+//   async create(dto: CreateUserDto, token: string): Promise<UserEntity> {
+//     // Valida o token do Firebase
+//     const decodedToken = await this.verifyFirebaseToken(token);
+
+//     // Adiciona o UID do Firebase ao DTO
+//     const userWithUid = {
+//       ...dto,
+//       firebaseUid: decodedToken.uid, // Extraído do token validado
+//     };
+
+//     // Salva o usuário no banco de dados
+//     const user = await this.userRepository.create(userWithUid);
+
+//     return user;
 //   }
 
-//   async createUser(data: Prisma.UserCreateInput): Promise<User> {
-//     return this.userRepository.create(data);
-//   }
-// }
-
-// import { Injectable } from '@nestjs/common';
-// import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-
-// @Injectable()
-// export class UserService {
-//   constructor(private readonly prismaService: PrismaService) {}
-
-//   async createUser(data: any) {
-//     return this.prismaService.user.create({ data });
-//   }
-// }
-
-// import { Injectable } from '@nestjs/common';
-// import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-
-// @Injectable()
-// export class UserService {
-//   constructor(private readonly prismaService: PrismaService) {
-//     console.log(Object.keys(this.prismaService)); // Adicione esta linha
-//   }
-
-//   async createUser(data: any) {
-//     return this.prismaService.user.create({ data });
+//   // Método para validar o token usando Firebase Admin SDK
+//   private async verifyFirebaseToken(token: string) {
+//     try {
+//       return await admin.auth().verifyIdToken(token);
+//     } catch (error) {
+//       throw new UnauthorizedException('Token inválido ou não fornecido.');
+//     }
 //   }
 // }

@@ -16,6 +16,7 @@ model User {
   endereco   String
   role       userRole @default(volunteer)
   totalHours Int
+  // firebaseUid String   @unique // Este é o novo campo adicionado
 
   @@map("users")
 }
