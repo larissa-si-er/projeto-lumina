@@ -1,5 +1,12 @@
 import { $Enums } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -12,6 +19,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(6)
   password: string;
 
   @IsString()
@@ -23,8 +31,8 @@ export class CreateUserDto {
   email: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  totalHours: number;
+  @IsOptional()
+  totalHours?: number;
 
   @IsEnum($Enums.userRole)
   @IsNotEmpty()

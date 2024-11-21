@@ -69,29 +69,56 @@
 // })
 // export class AppModule {}
 
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+// import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { RouteReuseStrategy } from '@angular/router';
+
+// import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// import { environment } from '../environments/environment';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     IonicModule.forRoot(),
+//     AppRoutingModule, //  módulo de roteamento
+//     AngularFireModule.initializeApp(environment.firebase), // Inicialização do Firebase
+//     AngularFireAuthModule, // Módulo de autenticação
+//   ],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   bootstrap: [AppComponent],
+//   schemas: [CUSTOM_ELEMENTS_SCHEMA], // Adicione este esquema se necessário
+// })
+// export class AppModule {}
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http'; // Importar o HttpClientModule
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(), // Certifique-se de incluir isso
-    AppRoutingModule, // Inclua o módulo de roteamento
+    IonicModule.forRoot(),
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    HttpClientModule, // Adicionar o HttpClientModule aqui
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Adicione este esquema se necessário
 })
 export class AppModule {}

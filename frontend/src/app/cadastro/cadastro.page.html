@@ -2,67 +2,6 @@
 
 <ion-content class="ion-padding">
   <div class="icon-container">
-      <img src="../../assets/img/logo-icon.png" class="logo" alt="" srcset=""> 
-  </div>
-
-  <div class="title-container">
-    <h2>CADASTRAR-SE</h2>
-  </div>
-
-  <form>
-    <ion-item>
-      <ion-label position="floating">Digite seu nome</ion-label>
-      <ion-input type="text"></ion-input>
-      <ion-icon slot="end" name="person-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Digite seu email</ion-label>
-      <ion-input type="email"></ion-input>
-      <ion-icon slot="end" name="mail-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Telefone</ion-label>
-      <ion-input type="tel"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Tipo de usuário</ion-label>
-      <ion-select>
-        <ion-select-option value="volunteer">Voluntário</ion-select-option>
-        <ion-select-option value="organizer">Organizador</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Digite sua senha</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Confirme sua senha</ion-label>
-      <ion-input type="password"></ion-input>
-      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
-    </ion-item>
-
-    <ion-button expand="full" class="btn-cadastrar">Cadastrar</ion-button>
-
-    <div class="separator">OU</div>
-    <ion-button expand="full" color="light" disabled>Entrar com Google</ion-button>
-
-    <ion-text class="text-footer">
-      <a href="/login">JÁ POSSUO UMA CONTA</a>
-    </ion-text>
-
-  </form>
-
-</ion-content> -->
-
-<ion-header></ion-header>
-
-<ion-content class="ion-padding">
-  <div class="icon-container">
     <img src="../../assets/img/logo-icon.png" class="logo" alt="Logo" />
   </div>
 
@@ -120,5 +59,152 @@
       fill="clear"
       >JÁ POSSUO UMA CONTA</ion-button
     >
+  </form>
+</ion-content> -->
+<!-- <ion-header></ion-header>
+
+<ion-content class="ion-padding">
+  <div class="icon-container">
+    <img src="../../assets/img/logo-icon.png" class="logo" alt="" />
+  </div>
+
+  <div class="title-container">
+    <h2>CADASTRAR-SE</h2>
+  </div>
+
+  <form>
+    <ion-item>
+      <ion-label position="floating">Digite seu nome</ion-label>
+      <ion-input
+        [(ngModel)]="name"
+        name="name"
+        type="text"
+        required
+      ></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite seu email</ion-label>
+      <ion-input
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+      ></ion-input>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input
+        [(ngModel)]="phone"
+        name="phone"
+        type="tel"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Digite sua senha</ion-label>
+      <ion-input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      ></ion-input>
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" (click)="register()">Cadastrar</ion-button>
+
+    <ion-text class="text-footer">
+      <a routerLink="/login">Já possui uma conta? Faça login</a>
+    </ion-text>
+  </form>
+</ion-content> -->
+<!-- //alteraçaoooooooooooo -->
+<ion-header></ion-header>
+
+<ion-content class="ion-padding">
+  <div class="icon-container">
+    <img src="../../assets/img/logo-icon.png" class="logo" alt="" />
+  </div>
+
+  <div class="title-container">
+    <h2>CADASTRAR-SE</h2>
+  </div>
+
+  <form (ngSubmit)="register()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input [(ngModel)]="name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input [(ngModel)]="phone" name="phone" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Campos de endereço -->
+    <ion-item>
+      <ion-label position="floating">CEP</ion-label>
+      <ion-input [(ngModel)]="endereco.zipcode" name="zipcode"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Rua</ion-label>
+      <ion-input [(ngModel)]="endereco.road" name="road"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-input [(ngModel)]="endereco.state" name="state"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cidade</ion-label>
+      <ion-input [(ngModel)]="endereco.city" name="city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Bairro</ion-label>
+      <ion-input
+        [(ngModel)]="endereco.neighborhood"
+        name="neighborhood"
+      ></ion-input>
+    </ion-item>
+
+    <ion-button
+      class="btn-geral"
+      expand="full"
+      type="submit"
+      [disabled]="loading"
+      >Cadastrar</ion-button
+    >
+
+    <ion-text class="text-footer">
+      <a routerLink="/login">JÁ POSSUO UMA CONTA</a>
+    </ion-text>
   </form>
 </ion-content>

@@ -75,78 +75,79 @@
 //     toast.present();
 //   }
 // }
+
+// alteraçaoooooooooooo
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {
-  LoadingController,
-  NavController,
-  ToastController,
-} from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { NavController, ToastController } from '@ionic/angular';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro',
-  templateUrl: './cadastro.page.html',
-  styleUrls: ['./cadastro.page.scss'],
+  templateUrl: 'cadastro.page.html',
+  styleUrls: ['cadastro.page.scss'],
 })
 export class CadastroPage {
   name: string = '';
   email: string = '';
+  phone: string = '';
   password: string = '';
+  endereco = {
+    zipcode: '',
+    road: '',
+    state: '',
+    city: '',
+    neighborhood: '',
+  };
+  loading: boolean = false;
 
   constructor(
-    private authService: AuthService,
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private http: HttpClient,
+    private afAuth: AngularFireAuth,
+    private toastController: ToastController
   ) {}
 
   async register() {
-    if (!this.name) {
-      this.showToast('Por favor, insira seu nome.', 'danger');
-      return;
-    }
-
-    if (!this.isEmailValid(this.email)) {
-      this.showToast(
-        'Email inválido. Por favor, verifique o formato.',
-        'warning'
-      );
-      return;
-    }
-
-    if (!this.password || this.password.length < 6) {
-      this.showToast('A senha deve ter pelo menos 6 caracteres.', 'danger');
-      return;
-    }
-
-    const loading = await this.loadingCtrl.create({
-      message: 'Cadastrando...',
-      spinner: 'crescent',
-    });
-    await loading.present();
-
     try {
-      await this.authService.registerWithEmail(this.email, this.password);
-      await loading.dismiss();
-      this.showToast('✔️ Cadastro realizado com sucesso!', 'success');
+      this.loading = true;
+      // aqui registra usuário no Firebase
+      const firebaseUser = await this.afAuth.createUserWithEmailAndPassword(
+        this.email,
+        this.password
+      );
+
+      const userPayload = {
+        id: firebaseUser.user?.uid, // UID gerado pelo Firebase
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        password: this.password, // Armazenar hash no backend
+        endereco: this.endereco, // Envia o endereço como um objeto
+        role: 'volunteer', // Valor padrão
+        totalHours: 0, // Valor padrão
+      };
+
+      // aqui envia os dados para o backend
+      await firstValueFrom(
+        this.http.post('http://localhost:3000/user', userPayload)
+      );
+
+      await this.showToast('✔️ Cadastro realizado com sucesso!', 'success');
       this.navCtrl.navigateForward('/login');
     } catch (err) {
-      await loading.dismiss();
-      this.showToast('❌ Erro ao cadastrar. Tente novamente.', 'danger');
+      await this.showToast('❌ Erro ao cadastrar. Tente novamente.', 'danger');
+    } finally {
+      this.loading = false;
     }
   }
 
-  isEmailValid(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  async showToast(message: string, color: string = 'dark') {
-    const toast = await this.toastCtrl.create({
-      message,
+  async showToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
       duration: 2000,
-      position: 'top',
-      color,
+      color: color,
     });
     toast.present();
   }

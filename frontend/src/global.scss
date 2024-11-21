@@ -36,40 +36,39 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
- 
-  ion-header {
-    box-shadow: none;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.1); 
+ion-header {
+  box-shadow: none;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --background: rgba(254, 254, 254, 0.568);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(254, 254, 254, 0.943);
+
+  .logo-icon {
+    position: absolute;
+    left: 10px;
+    width: 40px;
+    height: auto;
   }
 
-  ion-toolbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --background: rgba(254, 254, 254, 0.568);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(254, 254, 254, 0.943);
-  
-    .logo-icon {
-      position: absolute;
-      left: 10px;  
-      width: 40px; 
-      height: auto;
-    }
-    
-    .logo-letter {
-      margin: 0 auto;
-      width: 150px;  
-      height: auto;
-      display: block; 
-    }
+  .logo-letter {
+    margin: 0 auto;
+    width: 150px;
+    height: auto;
+    display: block;
   }
+}
 
-  ion-content {
-    --background: #eeee;
-  }
+ion-content {
+  --background: #eeee;
+}
 
-  /* Barra de Pesquisa */
+/* Barra de Pesquisa */
 .search-bar {
   display: flex;
   align-items: center;
@@ -81,7 +80,6 @@
   flex-grow: 1;
   margin: 0 10px;
 }
-
 
 .search-input {
   flex-grow: 1;
@@ -95,4 +93,23 @@
 
 .icon {
   font-size: 24px;
+}
+
+.btn-geral {
+  margin-top: 20px;
+  --background: linear-gradient(to right, #75004e, #db0092);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 30px;
+  height: 50px;
+  text-transform: uppercase;
+}
+
+.btn-google {
+  color: #8f8f8f;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 30px;
+  height: 50px;
 }
