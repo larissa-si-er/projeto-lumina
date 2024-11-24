@@ -1,9 +1,15 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'app-blank-lumina',
-  webDir: 'www'
+  appId: 'com.lumina.app',
+  appName: 'Lumina',
+  webDir: 'www',
+  bundledWebRuntime: false,
+  plugins: {
+    FirebaseAuthentication: {
+      skipNativeAuth: false,
+    },
+  },
 };
 
 export default config;

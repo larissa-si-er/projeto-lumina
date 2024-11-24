@@ -1,7 +1,11 @@
-<ion-header [translucent]="true" class="custom-header">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button
+        defaultHref="/"
+        icon="arrow-back-outline"
+        text=""
+      ></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -9,18 +13,27 @@
 <ion-content>
   <!-- Imagem de fundo e cards sobrepostos -->
   <div class="image-container">
-    <ion-img class="background-image" src="../../../assets/img/imgcard.png"></ion-img>
-    
+    <ion-img
+      class="background-image"
+      src="../../../assets/img/imgcard.png"
+    ></ion-img>
+
     <!-- Cards com as imagens -->
     <div class="cards-container">
       <ion-card class="overlay-card">
-        <ion-img src="https://storage.googleapis.com/novo-blog-wordpress/2023/06/66b7abfe-temas-sobre-meio-ambiente.jpg"></ion-img>
+        <ion-img
+          src="https://storage.googleapis.com/novo-blog-wordpress/2023/06/66b7abfe-temas-sobre-meio-ambiente.jpg"
+        ></ion-img>
       </ion-card>
       <ion-card class="overlay-card">
-        <ion-img src="https://www.lancers.com.br/wp-content/uploads/2024/06/imagem-blog-1024x574.jpg"></ion-img>
+        <ion-img
+          src="https://www.lancers.com.br/wp-content/uploads/2024/06/imagem-blog-1024x574.jpg"
+        ></ion-img>
       </ion-card>
       <ion-card class="overlay-card">
-        <ion-img src="https://www.luziania.go.gov.br/wp-content/uploads/2023/07/tamb_10dicas.png"></ion-img>
+        <ion-img
+          src="https://www.luziania.go.gov.br/wp-content/uploads/2023/07/tamb_10dicas.png"
+        ></ion-img>
       </ion-card>
     </div>
   </div>
@@ -29,7 +42,10 @@
   <ion-card class="details-card">
     <ion-card-content>
       <h3>Ação do povo</h3>
-      <p><strong>Descrição:</strong> Uma ação para a casa do povo com incentivo à educação ambiental e coleta de lixos em  áreas afetadas.</p>
+      <p>
+        <strong>Descrição:</strong> Uma ação para a casa do povo com incentivo à
+        educação ambiental e coleta de lixos em áreas afetadas.
+      </p>
       <p><strong>Local:</strong> Casa do povo</p>
       <p><strong>Data início:</strong> 14/10/2021</p>
       <p><strong>Horário início:</strong> 16:32</p>

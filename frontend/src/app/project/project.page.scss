@@ -1,0 +1,342 @@
+ion-toolbar {
+  --background: #fff;
+  --border-width: 0 0 1px 0;
+  --border-color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 2%;
+  border: none;
+  box-shadow: none;
+}
+ion-back-button {
+  font-size: 17px;
+  color: rgba(193, 0, 93, 0.722);
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+ion-card {
+  margin: 15px 0;
+}
+
+@media (max-width: 768px) {
+  .group-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+/* Container do cabeçalho */
+.header-container {
+  position: relative;
+}
+
+.header-slides {
+  height: 200px;
+}
+
+.company-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+/* Título da Ação */
+.action-header {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.action-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 9%;
+}
+
+.separator {
+  width: 92%;
+  margin: 0 auto;
+  border: 0;
+  border-top: 2px solid #ccc;
+}
+
+/* Segmentos */
+.custom-segment {
+  margin: 10px 0;
+}
+
+.segment-content {
+  padding: 0 10px;
+}
+
+.segment-section {
+  padding: 10px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .custom-segment {
+    font-size: 14px;
+  }
+
+  .header-slides {
+    height: 150px;
+  }
+
+  .action-title {
+    font-size: 18px;
+  }
+}
+.custom-segment.scrollable {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: flex-start;
+
+  ion-segment-button {
+    flex: 0 0 auto;
+    min-width: 100px;
+    text-align: center;
+  }
+}
+
+//taks
+.tasks-container {
+  padding: 16px;
+}
+
+.tasks-header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 5px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tasks-header ion-icon {
+  font-size: 25px;
+  margin-right: 25%;
+}
+
+.title {
+  font-size: 20px;
+  font-family: "Kanit", sans-serif;
+}
+
+.task-section {
+  margin-bottom: 16px;
+}
+
+.section-header {
+  margin-bottom: 8px;
+}
+
+.section-header h3 {
+  font-size: 18px;
+  font-family: "Kanit", sans-serif;
+}
+
+.section-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  padding: 0 8px;
+  margin-bottom: 8px;
+}
+
+.tasks-list {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.task-title {
+  flex: 2;
+  font-family: "Kanit", sans-serif;
+}
+
+.task-date,
+.task-responsible,
+.task-status {
+  flex: 1;
+  text-align: center;
+}
+.section-one {
+  color: red;
+}
+.section-two {
+  color: blue;
+}
+.section-three {
+  color: green;
+}
+.main-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  opacity: 0.5;
+}
+//segmento
+// ion-segment {
+//   --background: transparent !important; /* Remove fundo do segmento */
+//   --indicator-color: transparent !important; /* Remove indicador padrão */
+
+//   display: flex;
+//   justify-content: space-around;
+
+//   ion-segment-button {
+//     --background: transparent !important; /* Remove fundo dos botões */
+//     --color: #757575; /* Cor do texto para botões não selecionados */
+//     --color-checked: #000; /* Cor do texto do botão selecionado */
+
+//     background: transparent !important; /* Remove qualquer fundo residual */
+//     border: none; /* Remove bordas */
+//     position: relative;
+
+//     font-family: "Kanit", sans-serif; /* Usa a fonte Kanit */
+//     font-size: 14px;
+//     font-weight: 500;
+//     text-transform: uppercase;
+//     padding: 8px 12px;
+
+//     /* Adiciona linha inferior no botão ativo */
+//     &::after {
+//       content: "";
+//       position: absolute;
+//       bottom: -4px;
+//       left: 0;
+//       width: 0;
+//       height: 2px;
+//       background-color: var(--color-checked); /* Linha apenas no ativo */
+//       transition: width 0.3s ease;
+//     }
+//   }
+
+//   /* Botão ativo */
+//   ion-segment-button[checked] {
+//     &::after {
+//       width: 100%; /* Linha cobre todo o botão ativo */
+//     }
+//   }
+// }
+
+/* Estilos gerais contato e reuniao:: */
+
+/* Segmento "Contato" */
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  justify-content: flex-start;
+}
+
+.contact-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.contact-action {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  justify-content: flex-start;
+}
+
+.contact-action.call,
+.contact-action.email {
+  border-left: 4px solid #b7b7b7;
+}
+
+.action-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+/* Segmento "Reuniões" */
+.meeting-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.meeting-image {
+  width: 110px;
+  height: 110px;
+  background-color: #e3e3e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.meeting-icon {
+  font-size: 48px;
+  color: #757575;
+}
+
+.meeting-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-icon {
+  font-size: 20px;
+  color: #757575;
+}
+//principal:
+.segment-section {
+  padding: 1rem;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}

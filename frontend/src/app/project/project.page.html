@@ -1,0 +1,232 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/projects"
+        icon="arrow-back-outline"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- Cabeçalho com slides e legenda -->
+  <div class="header-container">
+    <ion-slides pager="true" class="header-slides">
+      <ion-slide>
+        <img
+          src="../../assets/img/imgcard.png"
+          alt="Foto 1"
+          class="main-image"
+        />
+      </ion-slide>
+    </ion-slides>
+    <div class="company-legend">Empresa XYZ</div>
+  </div>
+
+  <!-- Nome da Ação e Separador -->
+  <div class="action-header">
+    <h1 class="action-title">Ação do Povo</h1>
+    <hr class="separator" />
+  </div>
+
+  <!-- Segmentos -->
+  <ion-segment
+    (ionChange)="segmentChanged($event)"
+    value="principal"
+    class="custom-segment scrollable"
+  >
+    <ion-segment-button value="principal">Principal</ion-segment-button>
+    <ion-segment-button value="contato">Contato</ion-segment-button>
+    <ion-segment-button value="tarefas">Tarefas</ion-segment-button>
+    <ion-segment-button value="reunioes">Reuniões</ion-segment-button>
+    <ion-segment-button value="integrantes">Integrantes</ion-segment-button>
+  </ion-segment>
+
+  <!-- Conteúdo dos Segmentos -->
+  <div [ngSwitch]="selectedSegment" class="segment-content">
+    <!-- Principal -->
+    <div *ngSwitchCase="'principal'" class="segment-section">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Progresso</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Contato -->
+    <div *ngSwitchCase="'contato'" class="contact-container">
+      <div class="contact-card">
+        <ion-icon name="chatbubbles-outline" class="contact-icon"></ion-icon>
+        <span>Entre em contato</span>
+      </div>
+      <div class="separator"></div>
+      <div class="contact-action call" (click)="showPhoneNumber()">
+        <ion-icon name="call-outline" class="action-icon"></ion-icon>
+        <span>Ligar</span>
+      </div>
+      <div class="contact-action email" (click)="showEmail()">
+        <ion-icon name="mail-outline" class="action-icon"></ion-icon>
+        <span>Enviar Email</span>
+      </div>
+    </div>
+
+    <!-- Tarefas -->
+    <div *ngSwitchCase="'tarefas'" class="tasks-container">
+      <div class="tasks-header">
+        <ion-icon name="list-outline"></ion-icon>
+        <h2 class="title">TAREFAS</h2>
+      </div>
+
+      <!-- Seção A FAZER -->
+      <div class="task-section">
+        <div class="section-header">
+          <h3 class="section-one">A FAZER</h3>
+        </div>
+        <div class="section-legend">
+          <span>Tarefa</span>
+          <span>Data</span>
+          <span>Resp.</span>
+          <span>Status</span>
+        </div>
+        <div class="tasks-list" style="border-left: 4px solid red">
+          <div *ngFor="let task of tasksAFazer" class="task-details">
+            <div class="task-title">{{ task.title }}</div>
+            <span>|</span>
+            <div class="task-date">{{ task.date }}</div>
+            <span>|</span>
+            <div class="task-responsible">
+              <ion-icon
+                *ngIf="!task.responsible"
+                name="person-add-outline"
+                (click)="addResponsible(task)"
+              ></ion-icon>
+              <span *ngIf="task.responsible">{{ task.responsible }}</span>
+            </div>
+            <span>|</span>
+            <div class="task-status">
+              <ion-icon
+                class="status-icon"
+                [style.color]="task.statusColor"
+                name="ellipse"
+              ></ion-icon>
+              <ion-icon
+                name="create-outline"
+                (click)="editTask(task)"
+              ></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção ANDAMENTO -->
+      <div class="task-section">
+        <div class="section-header">
+          <h3 class="section-two">ANDAMENTO</h3>
+        </div>
+        <div class="tasks-list" style="border-left: 4px solid blue">
+          <div *ngFor="let task of tasksInProgress" class="task-details">
+            <div class="task-title">{{ task.title }}</div>
+            <span>|</span>
+            <div class="task-date">{{ task.date }}</div>
+            <span>|</span>
+            <div class="task-responsible">
+              <ion-icon
+                *ngIf="!task.responsible"
+                name="person-add-outline"
+                (click)="addResponsible(task)"
+              ></ion-icon>
+              <span *ngIf="task.responsible">{{ task.responsible }}</span>
+            </div>
+            <span>|</span>
+            <div class="task-status">
+              <ion-icon
+                class="status-icon"
+                [style.color]="task.statusColor"
+                name="ellipse"
+              ></ion-icon>
+              <ion-icon
+                name="create-outline"
+                (click)="editTask(task)"
+              ></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção CONCLUÍDO -->
+      <div class="task-section">
+        <div class="section-header">
+          <h3 class="section-three">CONCLUÍDO</h3>
+        </div>
+        <div class="tasks-list" style="border-left: 4px solid green">
+          <div *ngFor="let task of tasksCompleted" class="task-details">
+            <div class="task-title">{{ task.title }}</div>
+            <span>|</span>
+            <div class="task-date">{{ task.date }}</div>
+            <span>|</span>
+            <div class="task-responsible">
+              <ion-icon
+                *ngIf="!task.responsible"
+                name="person-add-outline"
+                (click)="addResponsible(task)"
+              ></ion-icon>
+              <span *ngIf="task.responsible">{{ task.responsible }}</span>
+            </div>
+            <span>|</span>
+            <div class="task-status">
+              <ion-icon
+                class="status-icon"
+                [style.color]="task.statusColor"
+                name="ellipse"
+              ></ion-icon>
+              <ion-icon
+                name="create-outline"
+                (click)="editTask(task)"
+              ></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reuniões -->
+    <div *ngSwitchCase="'reunioes'" class="meeting-container">
+      <div class="meeting-image">
+        <ion-icon name="laptop-outline" class="meeting-icon"></ion-icon>
+      </div>
+      <div class="meeting-details">
+        <div class="detail-item">
+          <ion-icon name="calendar-outline" class="detail-icon"></ion-icon>
+          <span>Título da Reunião</span>
+        </div>
+        <div class="detail-item">
+          <span>Data: 12/07</span>
+        </div>
+        <div class="detail-item">
+          <span>Hora: 12:00</span>
+        </div>
+        <div class="detail-item">
+          <span
+            >Local: <a href="https://example.com">https://example.com</a></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Integrantes -->
+    <div *ngSwitchCase="'integrantes'" class="segment-section">
+      <h2>Integrantes</h2>
+      <ion-list>
+        <ion-item>
+          <ion-label>Administrador: Nome</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

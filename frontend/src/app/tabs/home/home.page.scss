@@ -1,26 +1,183 @@
+// // ion-toolbar {
+// //   position: relative;
+// //   display: flex;
+// //   align-items: center;
+// //   justify-content: center;
+// // }
+
+// // .logo-icon {
+// //   position: absolute;
+// //   left: 10px;  /* Ajusta a posição da logo */
+// //   width: 40px; /* Tamanho da imagem da logo */
+// //   height: auto;
+// // }
+
+// // .logo-letter {
+// //   width: 150px;  /* Tamanho da imagem da escrita */
+// //   height: auto;
+// //   /* A logo letter já estará centralizada porque o ion-toolbar usa flexbox para centralizar elementos */
+// // }
+
+// ion-header {
+//   box-shadow: none;
+//   border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
+// }
+
 // ion-toolbar {
 //   position: relative;
 //   display: flex;
 //   align-items: center;
-//   justify-content: center;
 // }
 
 // .logo-icon {
 //   position: absolute;
-//   left: 10px;  /* Ajusta a posição da logo */
-//   width: 40px; /* Tamanho da imagem da logo */
+//   left: 10px;
+//   width: 40px;
 //   height: auto;
 // }
 
 // .logo-letter {
-//   width: 150px;  /* Tamanho da imagem da escrita */
+//   margin: 0 auto;
+//   width: 150px;
 //   height: auto;
-//   /* A logo letter já estará centralizada porque o ion-toolbar usa flexbox para centralizar elementos */
+//   display: block;
 // }
 
+// ion-content{
+//   --background: #eeee;
+// }
+
+// /* Barra de Pesquisa */
+// .search-bar {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 10px;
+// }
+
+// .search-input {
+//   flex-grow: 1;
+//   margin: 0 10px;
+// }
+
+// .search-input {
+//   flex-grow: 1;
+//   --border-radius: 10px;
+//   --placeholder-color: #999;
+//   --padding-start: 10px;
+//   --padding-end: 10px;
+//   --color: #333;
+//   --icon-color: #ff4081;
+// }
+
+// .icon {
+//   font-size: 24px;
+// }
+
+// /* Títulos das Seções */
+// .section-title {
+//   padding: 10px 0 0 10px;
+//   color: #333;
+//   font-weight: bold;
+//   font-size: 1.2em;
+// }
+
+// /* Notícias */
+// .news-card {
+//   border-radius: 12px;
+//   overflow: hidden;
+// }
+
+// .news-content {
+//   text-align: center;
+//   padding: 5px;
+// }
+
+// .news-date {
+//   font-weight: bold;
+//   margin: 0;
+//   font-size: 0.9em;
+// }
+
+// .news-text {
+//   font-size: 0.8em;
+// }
+
+// /* Filtros de Ações */
+// .filters {
+//   display: flex;
+//   gap: 10px;
+//   padding: 0 10px;
+//   margin-bottom: 15px;
+// }
+
+// .filter-button {
+//   border-radius: 50%;
+//   padding: 0 5px;
+//   --background: #f1c2d8a3;
+//   color: white;
+//   font-size: 12px;
+//   box-shadow: none !important;
+//   border: none !important;
+// }
+
+// /* Card de Voluntariado */
+// .volunteer-card {
+//   border-radius: 15px;
+//   overflow: hidden;
+//   margin: 0 10px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//   margin-bottom: 70%;
+// }
+
+// .volunteer-img {
+//   border-radius: 15px 15px 0 0;
+//   height: 200px;
+//   object-fit: contain; /* Garante que a imagem não seja cortada */
+// }
+
+// .volunteer-info {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin: 10px 0;
+// }
+
+// .volunteer-team {
+//   color: #ff4081;
+//   font-weight: bold;
+// }
+
+// .volunteer-link {
+//   color: #ff4081;
+// }
+
+// .volunteer-action {
+//   margin-top: 5px;
+//   color: #333;
+// }
+
+// .volunteer-slots {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-top: 10px;
+// }
+
+// .volunteer-item {
+//   --background: transparent;
+//   --padding-start: 0;
+//   font-size: 0.85em;
+// }
+
+// .volunteer-item ion-icon {
+//   margin-right: 5px;
+// }
+
+/* Cabeçalho */
 ion-header {
   box-shadow: none;
-  border-bottom: 1.5px solid rgba(0, 0, 0, 0.1); 
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
 }
 
 ion-toolbar {
@@ -31,28 +188,17 @@ ion-toolbar {
 
 .logo-icon {
   position: absolute;
-  left: 10px;  
-  width: 40px; 
+  left: 15px; /* Ajuste a posição da logo */
+  width: 40px;
   height: auto;
 }
 
 .logo-letter {
   margin: 0 auto;
-  width: 150px;  
+  width: 150px;
   height: auto;
-  display: block; 
+  display: block;
 }
-
-
-ion-content{
-  --background: #eeee;
-}
-
-
-
-
-
-
 
 /* Barra de Pesquisa */
 .search-bar {
@@ -65,11 +211,6 @@ ion-content{
 .search-input {
   flex-grow: 1;
   margin: 0 10px;
-}
-
-
-.search-input {
-  flex-grow: 1;
   --border-radius: 10px;
   --placeholder-color: #999;
   --padding-start: 10px;
@@ -129,32 +270,55 @@ ion-content{
   border: none !important;
 }
 
-
+.filter-button.active {
+  --background: #ffbbd1;
+  color: white;
+  font-weight: bold;
+}
 
 /* Card de Voluntariado */
 .volunteer-card {
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  margin: 0 10px;
+  margin: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 70%;
+  width: calc(100% - 20px);
+  margin-bottom: 10%;
 }
 
+/* Ajuste de padding no card */
 .volunteer-img {
-  border-radius: 15px 15px 0 0;
+  width: 100%;
   height: 200px;
-  object-fit: contain; /* Garante que a imagem não seja cortada */
+  object-fit: cover;
+  position: relative;
 }
 
-.volunteer-info {
+.image-caption {
+  position: absolute;
+  bottom: 50%;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+/* Conteúdo do Card */
+.volunteer-content {
+  padding: 10px;
+}
+
+.volunteer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
-.volunteer-team {
-  color: #ff4081;
+.volunteer-action-name {
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -162,24 +326,111 @@ ion-content{
   color: #ff4081;
 }
 
-.volunteer-action {
-  margin-top: 5px;
-  color: #333;
+.segment-separator {
+  margin: 14px 0;
+  background-color: #c5c5c5;
+  height: 0.5px;
 }
 
-.volunteer-slots {
+/* (Vagas) e Botão Participar */
+.volunteer-stats {
+  flex: 1;
+  flex-direction: column;
   display: flex;
-  justify-content: space-between;
+}
+
+.volunteer-stat {
+  flex: 1;
+}
+
+.stat-icon {
+  border-radius: 100%;
+  padding: 7px;
+  margin-bottom: 2px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 12px;
+  overflow: hidden;
+  color: #a3a3a3;
+}
+.total {
+  background-color: #d9d9d9;
+}
+.disponivel {
+  background-color: #c2f1d5;
+}
+
+.stat-number {
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #acacac;
+  margin-top: 5px;
+  margin: 5% 10%;
+}
+
+/* Botão Participar */
+.volunteer-participate {
+  text-align: center;
+  width: 55%;
+  text-align: end;
+}
+
+.participate-button {
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
   align-items: center;
-  margin-top: 10px;
+  background: transparent;
+  color: #ffa1d4;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
 }
-
-.volunteer-item {
+ion-button.participate-button {
   --background: transparent;
-  --padding-start: 0;
-  font-size: 0.85em;
+  --border: none;
+  --color: #ff4081;
+  --box-shadow: none;
+  --padding: 0;
+  --background-activated: transparent;
+  --background-focused: transparent;
 }
 
-.volunteer-item ion-icon {
-  margin-right: 5px;
+.participate-button ion-icon {
+  font-size: 1.5em;
+}
+
+/* Ajustes para Responsividade */
+@media (max-width: 600px) {
+  .volunteer-card {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .volunteer-img {
+    height: 180px;
+  }
+
+  .volunteer-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .volunteer-stats {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .volunteer-stat {
+    margin-bottom: 10px;
+  }
 }

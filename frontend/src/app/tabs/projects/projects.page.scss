@@ -1,0 +1,28 @@
+ion-header {
+  box-shadow: none;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
+}
+
+ion-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  position: absolute;
+  left: 10px;
+  width: 40px;
+  height: auto;
+}
+
+.logo-letter {
+  margin: 0 auto;
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+ion-content {
+  --background: #eeee;
+}

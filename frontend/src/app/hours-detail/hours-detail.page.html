@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/profile"
+        icon="arrow-back-outline"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- Cabeçalho com imagem de fundo -->
+  <div class="profile-header">
+    <img src="assets/img/back-profile.png" alt="Background" />
+  </div>
+
+  <!-- Total de horas -->
+  <ion-card>
+    <ion-card-content class="hours">
+      <ion-icon name="time-outline"></ion-icon>
+      <div class="hours-total">
+        <p class="total-hours">49:00:00</p>
+        <p class="estimated-hours">Estimativa de horas de voluntariado</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Bloco "Entradas" -->
+  <ion-card class="entries-card">
+    <ion-card-header>
+      <ion-card-title>Entradas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Lista de horas -->
+      <div class="hours-list">
+        <ion-item
+          *ngFor="let hora of horas"
+          (click)="openHourModal(hora)"
+          lines="full"
+          class="hour-item"
+        >
+          <ion-avatar slot="start">
+            <div class="avatar">
+              <ion-icon name="heart-outline"></ion-icon>
+            </div>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{ hora.acao }}</h3>
+            <p>{{ hora.empresa }}</p>
+          </ion-label>
+          <ion-badge color="light" slot="end">+{{ hora.horas }}</ion-badge>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Modal Personalizado -->
+  <ion-modal
+    id="example-modal"
+    #modal
+    [isOpen]="isModalOpen"
+    (ionModalDidDismiss)="closeHourModal()"
+  >
+    <ng-template>
+      <div class="custom-modal">
+        <!-- Botão de fechar -->
+        <ion-icon
+          name="close"
+          class="close-icon"
+          (click)="closeHourModal()"
+        ></ion-icon>
+
+        <!-- Informações principais -->
+        <div class="modal-content">
+          <!-- Horas -->
+          <h1 class="modal-hours">+{{ selectedHour?.horas }}</h1>
+
+          <!-- Ação e Empresa -->
+          <h2 class="modal-action">{{ selectedHour?.acao }}</h2>
+          <p class="modal-company">{{ selectedHour?.empresa }}</p>
+
+          <!-- Separador -->
+          <hr />
+
+          <!-- Entrada -->
+          <div class="time-entry">
+            <div class="icon-circle">
+              <ion-icon name="arrow-down" class="time-icon"></ion-icon>
+            </div>
+            <span class="time-label">Entrada</span>
+            <span class="time-value">{{ selectedHour?.entrada }}</span>
+          </div>
+
+          <!-- Saída -->
+          <div class="time-entry">
+            <div class="icon-circle">
+              <ion-icon name="arrow-up" class="time-icon"></ion-icon>
+            </div>
+            <span class="time-label">Saída</span>
+            <span class="time-value">{{ selectedHour?.saida }}</span>
+          </div>
+
+          <!-- Botão de download -->
+          <ion-button
+            expand="block"
+            class="download-button"
+            (click)="downloadCertificado(selectedHour)"
+          >
+            Download Certificado
+          </ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

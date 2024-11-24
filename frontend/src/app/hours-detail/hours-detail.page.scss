@@ -1,0 +1,277 @@
+/* Cabeçalho */
+.profile-header {
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .profile-info {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+// /* Total de Horas */
+// .hours {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   .hours-icon {
+//     font-size: 24px;
+//     margin-right: 10px;
+//   }
+
+//   p {
+//     margin: 0;
+//     font-size: 16px;
+//     font-weight: bold;
+//   }
+// }
+
+/* Entradas */
+.entries-card {
+  margin-top: 10px;
+}
+
+.hours-list .hour-item {
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ffe4ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-icon {
+    color: #ff5252;
+    font-size: 20px;
+  }
+
+  ion-label h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+  }
+
+  ion-label p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  ion-badge {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+/* Modal */
+.modal-wrapper {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+ion-list {
+  text-align: left;
+}
+
+ion-button {
+  margin-top: 20px;
+}
+/* Estilo do Modal */
+ion-modal {
+  --background: var(--ion-background-color, #ffffff11);
+  border: none;
+  box-shadow: none;
+}
+.custom-modal {
+  position: relative;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  margin: 10% auto;
+  //   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Botão de fechar */
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Horas no topo */
+.modal-hours {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  margin: 10px 0;
+}
+
+/* Título da ação */
+.modal-action {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(212, 0, 103);
+  margin: 5px 0;
+}
+
+/* Nome da empresa */
+.modal-company {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Separador */
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+/* Estilo das entradas e saídas */
+.time-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  .icon-circle {
+    width: 30px;
+    height: 30px;
+    background: #fddde0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .time-icon {
+    font-size: 18px;
+    color: #ff5252;
+  }
+
+  .time-label {
+    flex: 1;
+    text-align: left;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #000;
+  }
+
+  .time-value {
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+/* Botão de download */
+.download-button {
+  --background: transparent;
+  --box-shadow: none;
+  color: rgb(193, 0, 93);
+  font-weight: bold;
+  border: 1px solid rgb(199, 0, 96);
+  border-radius: 8px;
+}
+ion-toolbar {
+  --background: #fff;
+  --border-width: 0 0 1px 0;
+  --border-color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 2%;
+  border: none;
+  box-shadow: none;
+}
+.toolbar-title {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  align-items: center;
+  align-self: center;
+}
+
+ion-back-button {
+  font-size: 17px;
+  color: rgba(193, 0, 93, 0.722);
+}
+.center-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  height: 40px;
+}
+.hours {
+  display: flex;
+  align-items: center;
+  //   justify-content: space-around;
+  //   padding: 16px;
+  padding: 13px;
+}
+
+.hours-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 25px;
+}
+
+.total-hours {
+  font-size: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+.estimated-hours {
+  font-size: 11px;
+  color: #8e8e8e;
+  margin-top: 2px;
+}
+
+ion-icon {
+  font-size: 30px;
+  color: #ff4081;
+}

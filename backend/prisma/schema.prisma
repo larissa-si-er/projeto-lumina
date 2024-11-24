@@ -1,3 +1,33 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "mongodb"
+//   url      = env("DATABASE_URL")
+// }
+
+// model User {
+//   id         String   @id @default(uuid()) @map("_id")
+//   name       String
+//   email      String   @unique
+//   phone      String
+//   password   String
+//   endereco   Json?
+//   // endereco   String? 
+//   role       userRole @default(volunteer)
+//   totalHours Int
+//   // firebaseUid String   @unique // Este é o novo campo adicionado
+
+//   @@map("users")
+// }
+
+// enum userRole {
+//   volunteer
+//   admin
+// }
+
+//ateraçoes:::::;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,6 +37,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum userRole {
+  volunteer
+  admin
+}
+
 model User {
   id         String   @id @default(uuid()) @map("_id")
   name       String
@@ -14,15 +49,134 @@ model User {
   phone      String
   password   String
   endereco   Json?
-  // endereco   String? 
   role       userRole @default(volunteer)
   totalHours Int
-  // firebaseUid String   @unique // Este é o novo campo adicionado
+
+  certificates  Certificate[] // Relacionamento com certificados
+  projects      ProjectParticipant[] // Relacionamento com projetos como participante
+  assignedTasks Task[]               @relation(name: "AssignedTasks") // Tarefas atribuídas
+
+  preferences UserSkill[] // Relacionamento many-to-many com Skill via tabela intermediária
 
   @@map("users")
 }
 
-enum userRole {
-  volunteer
-  admin
+model Skill {
+  id       String         @id @default(uuid()) @map("_id")
+  name     String
+  users    UserSkill[] // Relacionamento many-to-many com User via tabela intermediária
+  projects ProjectSkill[] // Relacionamento many-to-many com Project via tabela intermediária
+
+  @@map("skills")
+}
+
+model UserSkill {
+  id      String @id @default(uuid()) @map("_id")
+  userId  String
+  skillId String
+
+  user  User  @relation(fields: [userId], references: [id]) // Relacionamento com User
+  skill Skill @relation(fields: [skillId], references: [id]) // Relacionamento com Skill
+
+  @@index([userId, skillId], map: "user_skill_unique")
+  @@map("user_skills")
+}
+
+model Certificate {
+  id          String    @id @default(uuid()) @map("_id")
+  userId      String
+  projectId   String
+  dateIssued  DateTime?
+  hoursEarned Int?
+
+  user    User    @relation(fields: [userId], references: [id]) // Relacionamento com User
+  project Project @relation(fields: [projectId], references: [id]) // Relacionamento com Project
+
+  @@index([userId, projectId])
+  @@map("certificates")
+}
+
+model Project {
+  id                String               @id @default(uuid()) @map("_id")
+  title             String
+  area              String
+  address           Json? // Endereço embutido como JSON
+  organization      String
+  organizationEmail String
+  organizationPhone String
+  startDate         DateTime
+  endDate           DateTime?
+  startTime         DateTime?
+  endTime           DateTime?
+  availableSpots    Int?
+  totalSpots        Int
+  description       String
+  hoursValue        Int?
+  mainImage         String
+  secondaryImages   String[]
+  skillsRequired    ProjectSkill[] // Relacionamento many-to-many com Skill via tabela intermediária
+  participants      ProjectParticipant[] // Participantes do projeto
+  tasks             Task[] // Relacionamento com Tarefas
+  meetings          Meeting[] // Relacionamento com Reuniões
+  certificates      Certificate[] // Relacionamento com certificados emitidos
+
+  // Recursos embutidos diretamente no projeto
+  resources Json[] // Array de objetos JSON para representar os recursos embutidos
+
+  createdAt DateTime @default(now()) // Data de criação
+
+  @@map("projects")
+}
+
+model ProjectSkill {
+  id        String @id @default(uuid()) @map("_id")
+  projectId String
+  skillId   String
+
+  project Project @relation(fields: [projectId], references: [id]) // Relacionamento com Project
+  skill   Skill   @relation(fields: [skillId], references: [id]) // Relacionamento com Skill
+
+  @@index([projectId, skillId], map: "project_skill_unique")
+  @@map("project_skills")
+}
+
+model ProjectParticipant {
+  id        String @id @default(uuid()) @map("_id")
+  userId    String
+  projectId String
+
+  user    User    @relation(fields: [userId], references: [id]) // Relacionamento com User
+  project Project @relation(fields: [projectId], references: [id]) // Relacionamento com Project
+
+  @@index([userId, projectId])
+  @@map("project_participants")
+}
+
+model Meeting {
+  id        String    @id @default(uuid()) @map("_id")
+  projectId String
+  title     String
+  date      DateTime
+  time      DateTime?
+  local     String?
+  link      String?
+
+  project Project @relation(fields: [projectId], references: [id]) // Relacionamento com Project
+
+  @@map("meetings")
+}
+
+model Task {
+  id          String  @id @default(uuid()) @map("_id")
+  projectId   String
+  name        String?
+  description String?
+  status      String?
+  assignedUid String? // Referência ao responsável (User)
+  createdBy   String?
+
+  project      Project @relation(fields: [projectId], references: [id])
+  assignedUser User?   @relation(name: "AssignedTasks", fields: [assignedUid], references: [id])
+
+  @@map("tasks")
 }
