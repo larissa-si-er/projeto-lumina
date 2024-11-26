@@ -104,10 +104,14 @@ model Project {
   organization      String
   organizationEmail String
   organizationPhone String
-  startDate         DateTime
-  endDate           DateTime?
-  startTime         DateTime?
-  endTime           DateTime?
+  // startDate         DateTime
+  // endDate           DateTime?
+  // startTime         DateTime?
+  // endTime           DateTime?
+  startDate         String // Armazena apenas a data (YYYY-MM-DD)
+  endDate           String? // Armazena apenas a data (YYYY-MM-DD)
+  startTime         String? // Armazena apenas a hora (HH:MM)
+  endTime           String? // Armazena apenas a hora (HH:MM)
   availableSpots    Int?
   totalSpots        Int
   description       String
