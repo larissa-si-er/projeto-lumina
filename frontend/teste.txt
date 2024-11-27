@@ -1,0 +1,405 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Criar Projeto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="createProject()">
+    <!-- Título -->
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input [(ngModel)]="project.title" name="title" required></ion-input>
+    </ion-item>
+
+    <!-- Área -->
+    <ion-item>
+      <ion-label position="stacked">Área</ion-label>
+      <ion-input [(ngModel)]="project.area" name="area" required></ion-input>
+    </ion-item>
+
+    <!-- Organização -->
+    <ion-item>
+      <ion-label position="stacked">Organização</ion-label>
+      <ion-input
+        [(ngModel)]="project.organization"
+        name="organization"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- E-mail da Organização -->
+    <ion-item>
+      <ion-label position="stacked">E-mail da Organização</ion-label>
+      <ion-input
+        [(ngModel)]="project.organizationEmail"
+        name="organizationEmail"
+        type="email"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Telefone da Organização -->
+    <ion-item>
+      <ion-label position="stacked">Telefone da Organização</ion-label>
+      <ion-input
+        [(ngModel)]="project.organizationPhone"
+        name="organizationPhone"
+        type="tel"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- TESTEEEEEEEEEEEEEEEE -->
+    <!-- Data de Início -->
+    <ion-item>
+      <ion-label position="floating">Data de Início</ion-label>
+      <ion-datetime
+        [(ngModel)]="project.startDate"
+        name="startDate"
+        display-format="YYYY-MM-DD"
+        required
+      ></ion-datetime>
+    </ion-item>
+
+    <!-- Hora de Início -->
+    <ion-item>
+      <ion-label position="floating">Hora de Início</ion-label>
+      <ion-datetime
+        [(ngModel)]="project.startTime"
+        name="startTime"
+        display-format="HH:mm"
+        picker-format="HH:mm"
+        required
+        type="time"
+      ></ion-datetime>
+    </ion-item>
+
+    <!-- Data de Fim -->
+    <ion-item>
+      <ion-label position="floating">Data de Fim</ion-label>
+      <ion-datetime
+        [(ngModel)]="project.endDate"
+        name="endDate"
+        display-format="YYYY-MM-DD"
+        required
+      ></ion-datetime>
+    </ion-item>
+
+    <!-- Hora de Fim -->
+    <ion-item>
+      <ion-label position="floating">Hora de Fim</ion-label>
+      <ion-datetime
+        [(ngModel)]="project.endTime"
+        name="endTime"
+        display-format="HH:mm"
+        picker-format="HH:mm"
+        required
+        type="time"
+      ></ion-datetime>
+    </ion-item>
+
+    <!-- TESTEEEEEEEEEEEEEEEEEEEEE -->
+
+    <!-- Data de Início -->
+    <!-- <ion-item>
+      <ion-label position="stacked">Data de Início</ion-label>
+      <ion-datetime
+        [(ngModel)]="project.startDate"
+        name="startDate"
+        required
+      ></ion-datetime>
+    </ion-item> -->
+
+    <!-- Data de Término -->
+    <!-- <ion-item>
+      <ion-label position="stacked">Data de Término</ion-label>
+      <ion-datetime [(ngModel)]="project.endDate" name="endDate"></ion-datetime>
+    </ion-item> -->
+
+    <!-- Total de Vagas -->
+    <ion-item>
+      <ion-label position="stacked">Total de Vagas</ion-label>
+      <ion-input
+        [(ngModel)]="project.totalSpots"
+        name="totalSpots"
+        type="number"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Descrição -->
+    <ion-item>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-textarea
+        [(ngModel)]="project.description"
+        name="description"
+        required
+      ></ion-textarea>
+    </ion-item>
+
+    <!-- Imagem Principal -->
+    <ion-item>
+      <ion-label position="stacked">Imagem Principal</ion-label>
+      <ion-input
+        [(ngModel)]="project.mainImage"
+        name="mainImage"
+        type="url"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Imagens Secundárias -->
+    <ion-item>
+      <ion-label position="stacked">Imagens Secundárias</ion-label>
+      <ion-textarea
+        [(ngModel)]="project.secondaryImages"
+        name="secondaryImages"
+        placeholder="Insira URLs separadas por vírgula"
+      ></ion-textarea>
+    </ion-item>
+
+    <!-- Recursos -->
+    <ion-item>
+      <ion-label position="stacked">Recursos</ion-label>
+      <ion-textarea
+        [(ngModel)]="project.resources"
+        name="resources"
+        placeholder="Ex: Nome: Quantidade"
+      ></ion-textarea>
+    </ion-item>
+
+    <!-- Habilidades Necessárias -->
+    <ion-item>
+      <ion-label position="stacked">Habilidades Necessárias</ion-label>
+      <ion-select [(ngModel)]="project.skills" name="skills" multiple>
+        <ion-select-option *ngFor="let skill of allSkills" [value]="skill.id">
+          {{ skill.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Adicionar Nova Habilidade -->
+    <ion-item>
+      <ion-label position="stacked">Nova Habilidade</ion-label>
+      <ion-input [(ngModel)]="newSkill" name="newSkill"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="addSkill()"
+      >Adicionar Habilidade</ion-button
+    >
+
+    <!-- Tarefas -->
+    <ion-item-divider>
+      <ion-label>Tarefas</ion-label>
+    </ion-item-divider>
+
+    <div *ngFor="let task of project.tasks; let i = index">
+      <ion-item>
+        <ion-label position="stacked">Título da Tarefa</ion-label>
+        <ion-input [(ngModel)]="task.title" name="taskTitle{{ i }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descrição da Tarefa</ion-label>
+        <ion-textarea
+          [(ngModel)]="task.description"
+          name="taskDescription{{ i }}"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Prazo da Tarefa</ion-label>
+        <ion-datetime
+          [(ngModel)]="task.deadline"
+          name="taskDeadline{{ i }}"
+        ></ion-datetime>
+      </ion-item>
+      <ion-button color="danger" expand="block" (click)="removeTask(i)"
+        >Remover Tarefa</ion-button
+      >
+    </div>
+
+    <ion-button expand="block" (click)="addTask()"
+      >Adicionar Nova Tarefa</ion-button
+    >
+
+    <!-- Botão de Submissão -->
+    <ion-button expand="full" type="submit">Criar Projeto</ion-button>
+  </form>
+</ion-content>
+-----------------------------------------------------------------------------
+CONTROLLER PROJECT TESTES:
+// // // project.service.ts
+// // import { HttpClient } from '@angular/common/http';
+// // import { Injectable } from '@angular/core';
+
+// // @Injectable({
+// //   providedIn: 'root',
+// // })
+// // export class ProjectService {
+// //   private baseUrl = 'http://localhost:3000/projects';
+
+// //   constructor(private http: HttpClient) {}
+
+// //   createProject(projectData: any) {
+// //     // Tipo `any` para o parâmetro
+// //     return this.http.post(this.baseUrl, projectData);
+// //   }
+// // }
+// // project.service.ts
+// import { HttpClient } from '@angular/common/http';
+// import { Injectable } from '@angular/core';
+// import { Observable } from 'rxjs';
+
+// @Injectable({
+//   providedIn: 'root',
+// })
+// export class ProjectService {
+//   private baseUrl = 'http://localhost:3000/projects';
+//   private tasksUrl = 'http://localhost:3000/tasks';
+//   private skillsUrl = 'http://localhost:3000/skills'; // URL da API de skills
+
+//   constructor(private http: HttpClient) {}
+
+//   // Função para criar um projeto
+//   // createProject(projectData: any) {
+//   //   return this.http.post(this.baseUrl, projectData);
+//   // }
+//   createProject(projectData: any): Observable<{ _id: string }> {
+//     return this.http.post<{ _id: string }>(this.baseUrl, projectData);
+//   }
+
+//   // Função para adicionar uma tarefa ao projeto
+//   addTask(taskData: any) {
+//     return this.http.post(this.tasksUrl, taskData); // Requisição POST para criar uma tarefa
+//   }
+
+//   // Função para carregar as skills
+//   getSkills() {
+//     return this.http.get<any[]>(this.skillsUrl); // Requisição GET para listar as skills
+//   }
+// }
+--------------------------------------------------------
+(app.module):
+// import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { RouteReuseStrategy } from '@angular/router';
+
+// import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+// import { HttpClientModule } from '@angular/common/http';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {}
+
+//teste1:
+
+// import { HttpClientModule } from '@angular/common/http';
+// import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { RouteReuseStrategy } from '@angular/router';
+// import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+
+// // Importa o módulo do Firebase
+// import { initializeApp } from 'firebase/app';
+// import { getAuth } from 'firebase/auth';
+// import { environment } from '../environments/environment';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     IonicModule.forRoot(),
+//     AppRoutingModule,
+//     HttpClientModule,
+//   ],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {
+//   constructor() {
+//     // Inicializa o Firebase com a configuração do ambiente
+//     initializeApp(environment.firebaseConfig);
+//     getAuth(); // Configuração do serviço de autenticação
+//   }
+// }
+
+// import { NgModule } from '@angular/core';
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { environment } from '../environments/environment';
+// import { AppComponent } from './app.component';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     AngularFireModule.initializeApp(environment.firebase),
+//     AngularFireAuthModule,
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {}
+
+// import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { RouteReuseStrategy } from '@angular/router';
+
+// import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// import { environment } from '../environments/environment';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     IonicModule.forRoot(),
+//     AppRoutingModule, //  módulo de roteamento
+//     AngularFireModule.initializeApp(environment.firebase), // Inicialização do Firebase
+//     AngularFireAuthModule, // Módulo de autenticação
+//   ],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   bootstrap: [AppComponent],
+//   schemas: [CUSTOM_ELEMENTS_SCHEMA], // Adicione este esquema se necessário
+// })
+// export class AppModule {}
+// import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { RouteReuseStrategy } from '@angular/router';
+// import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+
+// import { HttpClientModule } from '@angular/common/http'; // Importar o HttpClientModule
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+// import { environment } from '../environments/environment';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     IonicModule.forRoot(),
+//     AppRoutingModule,
+//     AngularFireModule.initializeApp(environment.firebase),
+//     AngularFireAuthModule,
+//     HttpClientModule, // Adicionar o HttpClientModule aqui
+//   ],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {}

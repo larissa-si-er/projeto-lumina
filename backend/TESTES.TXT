@@ -1,0 +1,661 @@
+CREATE-PROJECT-DTO:
+// import { Type } from 'class-transformer';
+// import {
+//   IsArray,
+//   IsDateString,
+//   IsNotEmpty,
+//   IsNumber,
+//   IsObject,
+//   IsOptional,
+//   IsString,
+//   ValidateNested,
+// } from 'class-validator';
+// import { CreateSkillDto } from 'src/domain/dtos/skill/create-skill.dto';
+// import { CreateTaskDto } from 'src/domain/dtos/task/create-task.dto';
+// import { CreateUserDto } from 'src/domain/dtos/user/create-user.dto';
+
+// class ConnectDto {
+//   @IsString()
+//   id: string;
+// }
+
+// export class CreateProjectDto {
+//   @IsString()
+//   @IsNotEmpty()
+//   title: string;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   area: string;
+
+//   @IsObject()
+//   @IsOptional()
+//   address?: Record<string, any>;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   organization: string;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   organizationEmail: string;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   organizationPhone: string;
+
+//   // @IsDateString()
+//   // @IsNotEmpty()
+//   // startDate: Date;
+
+//   // @IsDateString()
+//   // @IsOptional()
+//   // endDate?: Date;
+
+//   // Ajuste para data (sem hora) com formato ISO 8601
+//   @IsString()
+//   @IsNotEmpty()
+//   startDate: string; // Será no formato 'YYYY-MM-DD'
+
+//   @IsString()
+//   @IsOptional()
+//   endDate?: string; // Será no formato 'YYYY-MM-DD'
+
+//   // Ajuste para hora (formato HH:mm)
+//   @IsString()
+//   @IsOptional()
+//   startTime?: string; // Será no formato 'HH:mm'
+
+//   @IsString()
+//   @IsOptional()
+//   endTime?: string; // Será no formato 'HH:mm'
+
+//   @IsNumber()
+//   @IsNotEmpty()
+//   totalSpots: number;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   description: string;
+
+//   @IsNumber()
+//   @IsOptional()
+//   hoursValue?: number;
+
+//   @IsString()
+//   @IsNotEmpty()
+//   mainImage: string;
+
+//   @IsArray()
+//   @IsOptional()
+//   secondaryImages: string[];
+
+//   @IsArray()
+//   @IsOptional()
+//   resources?: Record<string, any>[];
+
+//   // @IsArray()
+//   // @IsOptional()
+//   // skillsRequired?: string[]; // IDs de habilidades
+
+//   // @IsArray()
+//   // @IsOptional()
+//   // tasks?: string[]; // IDs de tarefas
+
+//   // // Adicionado: participants
+//   // @IsOptional()
+//   // @IsArray()
+//   // @IsString({ each: true })
+//   // participants?: string[];
+
+//   //alteraçoes 24/11:
+//   // @IsOptional()
+//   // @ValidateNested({ each: true })
+//   // @Type(() => ConnectDto)
+//   // skillsRequired?: {
+//   //   connect: ConnectDto[];
+//   //   create?: { name: string }[]; // Suporte para criar novas habilidades
+//   // };
+
+//   // @IsOptional()
+//   // @ValidateNested({ each: true })
+//   // @Type(() => ConnectDto)
+//   // participants?: {
+//   //   connect: ConnectDto[];
+//   // };
+
+//   // @IsOptional()
+//   // @ValidateNested({ each: true })
+//   // @Type(() => ConnectDto)
+//   // tasks?: {
+//   //   connect: ConnectDto[];
+//   // };
+
+//   //ALTERAÇOES 25/11
+//   // @IsOptional()
+//   // skillsRequired?: {
+//   //   connect?: { id: string }[];
+//   //   create?: CreateSkillDto[]; // Permite criar novas skills
+//   // };
+
+//   // @IsOptional()
+//   // tasks?: {
+//   //   connect?: { id: string }[];
+//   //   create?: CreateTaskDto[]; // Permite criar novas tasks
+//   // };
+
+//   // @IsOptional()
+//   // participants?: {
+//   //   connect?: { id: string }[];
+//   //   create?: CreateUserDto[]; // Usar CreateUserDto completo para criar participantes
+//   // };
+
+//   // Alterações para garantir que a criação ou conexão de habilidades funcione corretamente
+//   @IsOptional()
+//   @ValidateNested({ each: true })
+//   @Type(() => CreateSkillDto)
+//   skillsRequired?: {
+//     connect?: { id: string }[]; // Conectar habilidades existentes
+//     create?: CreateSkillDto[]; // Criar novas habilidades
+//   };
+
+//   @IsOptional()
+//   @ValidateNested({ each: true })
+//   @Type(() => CreateTaskDto)
+//   tasks?: {
+//     connect?: { id: string }[];
+//     create?: CreateTaskDto[]; // Criar novas tasks
+//   };
+
+//   @IsOptional()
+//   @ValidateNested({ each: true })
+//   @Type(() => CreateUserDto)
+//   participants?: {
+//     connect?: { id: string }[];
+//     create?: CreateUserDto[]; // Criar novos participantes
+//   };
+// }
+
+src/domain/entities/project.entity.ts:
+// import { Prisma } from '@prisma/client';
+
+// export class ProjectEntity {
+//   id: string;
+//   title: string;
+//   area: string;
+//   address?: Prisma.JsonValue; // Alinhado com o Prisma
+//   organization: string;
+//   organizationEmail: string;
+//   organizationPhone: string;
+//   // startDate: Date;
+//   // endDate?: Date;
+//   startDate: string; // Formato 'YYYY-MM-DD'
+//   endDate?: string; // Formato 'YYYY-MM-DD'
+//   // Ajuste para hora
+//   startTime: string; // Formato 'HH:mm'
+//   endTime: string; // Formato 'HH:mm'
+
+//   availableSpots?: number;
+//   totalSpots: number;
+//   description: string;
+//   hoursValue?: number;
+//   mainImage: string;
+//   secondaryImages: string[];
+//   resources: Prisma.JsonValue[]; // Recursos como array de JSON
+//   createdAt: Date;
+
+//   // Relacionamentos
+//   // skillsRequired?: any[]; // Relacionamento inicial vazio
+//   // participants?: any[];
+//   // tasks?: any[];
+
+//   //25/11:
+//   skillsRequired: Prisma.ProjectSkillCreateNestedManyWithoutProjectInput;
+//   participants: Prisma.ProjectParticipantCreateNestedManyWithoutProjectInput;
+//   tasks: Prisma.TaskCreateNestedManyWithoutProjectInput;
+
+//   constructor(projectData: Partial<ProjectEntity>) {
+//     Object.assign(this, projectData);
+//   }
+// }
+------------------------------------------------------------------------
+(schema.prisma) -> funcional só com user:
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "mongodb"
+//   url      = env("DATABASE_URL")
+// }
+
+// model User {
+//   id         String   @id @default(uuid()) @map("_id")
+//   name       String
+//   email      String   @unique
+//   phone      String
+//   password   String
+//   endereco   Json?
+//   // endereco   String? 
+//   role       userRole @default(volunteer)
+//   totalHours Int
+//   // firebaseUid String   @unique // Este é o novo campo adicionado
+
+//   @@map("users")
+// }
+
+// enum userRole {
+//   volunteer
+//   admin
+// }
+----------------------------------------------------------------------------
+(project controller):
+// import { Body, Controller, Post } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { ProjectEntity } from 'src/domain/entities';
+// import { ProjectService } from '../services/project.service';
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(private readonly projectService: ProjectService) {}
+
+//   @Post()
+//   async createProject(
+//     @Body() createProjectDto: CreateProjectDto,
+//   ): Promise<ProjectEntity> {
+//     return this.projectService.createProject(createProjectDto);
+//   }
+// }
+// import { Body, Controller, Get, Post } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { ProjectEntity } from 'src/domain/entities/project/project.entity';
+// import { ProjectService } from '../services/project.service';
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(private readonly projectService: ProjectService) {}
+
+//   @Post()
+//   async create(
+//     @Body() createProjectDto: CreateProjectDto,
+//   ): Promise<ProjectEntity> {
+//     return this.projectService.create(createProjectDto);
+//   }
+
+//   @Get()
+//   async findAll(): Promise<ProjectEntity[]> {
+//     return this.projectService.findAll();
+//   }
+// }
+//ALTERAÇÃO 25/11
+// import { SkillService } from 'src/modules/skill/services/skill.service'; // Corrigido
+// import { TaskService } from 'src/modules/task/services/task.service'; // Corrigido
+// import { Body, Controller, Get, Post } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { ProjectEntity } from 'src/domain/entities/project/project.entity';
+// import { ProjectService } from '../services/project.service';
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(
+//     private readonly projectService: ProjectService,
+//     private readonly skillService: SkillService,
+//     private readonly taskService: TaskService
+//   ) {}
+
+//   @Post()
+//   async createProject(@Body() createProjectDto: CreateProjectDto) {
+//     // Criar as habilidades novas, se existirem
+//     if (createProjectDto.skillsRequired?.create) {
+//       const newSkills = await Promise.all(
+//         createProjectDto.skillsRequired.create.map(skill =>
+//           this.skillService.create(skill) // Criação das novas habilidades
+//         )
+//       );
+
+//       // Conectar as habilidades criadas ao projeto
+//       createProjectDto.skillsRequired.connect = newSkills.map(skill => ({
+//         id: skill.id
+//       }));
+//     }
+
+//     // Criar as tarefas novas, se existirem
+//     if (createProjectDto.tasks?.create) {
+//       const newTasks = await Promise.all(
+//         createProjectDto.tasks.create.map(task =>
+//           this.taskService.create(task) // Criação das novas tarefas
+//         )
+//       );
+
+//       // Conectar as tarefas criadas ao projeto
+//       createProjectDto.tasks.connect = newTasks.map(task => ({
+//         id: task.id
+//       }));
+//     }
+
+//     // Criar o projeto com as habilidades e tarefas associadas
+//     return this.projectService.create(createProjectDto);
+//   }
+// }
+// src/domain/controllers/project.controller.ts
+// import { Body, Controller, Post } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { ProjectService } from 'src/modules/project/services/project.service';
+// import { SkillService } from 'src/modules/skill/services/skill.service';
+// import { TaskService } from 'src/modules/task/services/task.service';
+// import { UserService } from 'src/modules/user/services/user.service'; // Serviço de usuários
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(
+//     private readonly projectService: ProjectService,
+//     private readonly skillService: SkillService,
+//     private readonly taskService: TaskService,
+//     private readonly userService: UserService, // Adicionando serviço de usuário
+//   ) {}
+
+//   @Post()
+//   async createProject(@Body() createProjectDto: CreateProjectDto) {
+//     // Criando habilidades novas, se existirem
+//     if (createProjectDto.skillsRequired?.create) {
+//       const newSkills = await Promise.all(
+//         createProjectDto.skillsRequired.create.map((skill) =>
+//           this.skillService.create(skill),
+//         ),
+//       );
+
+//       createProjectDto.skillsRequired.connect = newSkills.map((skill) => ({
+//         id: skill.id,
+//       }));
+//     }
+
+//     // Criando participantes, se existirem
+//     if (createProjectDto.participants?.create) {
+//       const newParticipants = await Promise.all(
+//         createProjectDto.participants.create.map(
+//           (participant) => this.userService.create(participant), // Criando participantes
+//         ),
+//       );
+
+//       createProjectDto.participants.connect = newParticipants.map((user) => ({
+//         id: user.id,
+//       }));
+//     }
+
+//     // Criando o projeto com as habilidades, tarefas e participantes associadas
+//     return this.projectService.create(createProjectDto);
+//   }
+// }
+///////////////////////////////////////////--------------------
+// import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { UpdateProjectDto } from 'src/domain/dtos/project/update-project.dto';
+// import { ProjectService } from '../services/project.service';
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(private readonly projectService: ProjectService) {}
+
+//   @Post()
+//   create(@Body() createProjectDto: CreateProjectDto) {
+//     return this.projectService.create(createProjectDto);
+//   }
+
+//   @Get(':id')
+//   findOne(@Param('id') id: string) {
+//     return this.projectService.findOne(id);
+//   }
+
+//   @Put(':id')
+//   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
+//     return this.projectService.update(id, updateProjectDto);
+//   }
+// }
+// import { Body, Controller, Post } from '@nestjs/common';
+// import { CreateProjectDto } from 'src/domain/dtos/project/create-project.dto';
+// import { ProjectService } from '../services/project.service';
+
+// @Controller('projects')
+// export class ProjectController {
+//   constructor(private projectService: ProjectService) {}
+
+//   @Post()
+//   async create(@Body() createProjectDto: CreateProjectDto) {
+//     return this.projectService.create(createProjectDto);
+//   }
+// }
+----------------------------------------------------------------------------------------
+(src/modules/skill/controllers/skill.controller.ts):
+
+// import { Body, Controller, Get, Post } from '@nestjs/common';
+// import { CreateSkillDto } from 'src/domain/dtos/skill/create-skill.dto';
+// import { SkillEntity } from 'src/domain/entities/skill/skill.entity';
+// import { SkillService } from '../services/skill.service';
+
+// @Controller('skills')
+// export class SkillController {
+//   constructor(private readonly skillService: SkillService) {}
+
+//   @Post()
+//   async create(@Body() createSkillDto: CreateSkillDto): Promise<SkillEntity> {
+//     return this.skillService.create(createSkillDto);
+//   }
+
+//   @Get()
+//   async findAll(): Promise<SkillEntity[]> {
+//     return this.skillService.findAll();
+//   }
+// }
+==========================================================================================
+(skill repository):
+// import { Injectable } from '@nestjs/common';
+// import { RepositoryFactory } from 'src/common/factories';
+// import { CreateSkillDto } from 'src/domain/dtos/skill/create-skill.dto';
+// import { SkillEntity } from 'src/domain/entities/skill/skill.entity';
+
+// @Injectable()
+// export class SkillRepository extends RepositoryFactory<
+//   SkillEntity,
+//   CreateSkillDto,
+//   any
+// > {
+//   constructor() {
+//     super('skill');
+//   }
+
+//   async createSkill(data: CreateSkillDto): Promise<SkillEntity> {
+//     return this.prismaService.skill.create({
+//       data,
+//     });
+//   }
+
+//   async findAllSkills(): Promise<SkillEntity[]> {
+//     return this.prismaService.skill.findMany();
+//   }
+// }
+--------------------------------------------------------------------------------------------
+(add project module):
+// import { CommonModule } from '@angular/common';
+// import { NgModule } from '@angular/core';
+// import { FormsModule } from '@angular/forms'; // Importando o FormsModule
+// import { IonicModule } from '@ionic/angular';
+// import { AddProjectPage } from './add-project.page';
+
+// @NgModule({
+//   declarations: [AddProjectPage], // Declare apenas aqui
+//   imports: [
+//     CommonModule,
+//     IonicModule,
+//     FormsModule, // Importando o FormsModule para usar ngModel
+//   ],
+//   exports: [AddProjectPage], // Exporte se precisar usar em outro módulo
+// })
+// export class AddProjectPageModule {}
+----------------------------------------------------------------------------------------------
+(add project ts):
+// import { HttpClient } from '@angular/common/http';
+// import { Component } from '@angular/core';
+// import { ToastController } from '@ionic/angular';
+// import { firstValueFrom } from 'rxjs';
+// import { ProjectService } from '../services/project.service'; // Serviço para lidar com API
+
+// @Component({
+//   selector: 'app-add-project',
+//   templateUrl: './add-project.page.html',
+//   styleUrls: ['./add-project.page.scss'],
+// })
+// export class AddProjectPage {
+//   // Objeto do projeto
+//   project = {
+//     _id: '',
+//     title: '',
+//     area: '',
+//     organization: '',
+//     organizationEmail: '',
+//     organizationPhone: '',
+//     startDate: '',
+//     endDate: '',
+//     startTime: '',
+//     endTime: '',
+//     totalSpots: 0,
+//     description: '',
+//     mainImage: '',
+//     secondaryImages: '',
+//     resources: '',
+//     tasks: [{ title: '', description: '', deadline: '' }], // Array de tarefas
+//     skills: [] as string[], // Habilidades adicionadas
+//   };
+
+//   allSkills: { id: string; name: string }[] = []; // Lista de skills do backend
+//   newSkill: string = ''; // Campo para adicionar nova skill
+
+//   constructor(
+//     private projectService: ProjectService,
+//     private toastController: ToastController
+//   ) {
+//     this.loadSkills(); // Carregar habilidades ao inicializar
+//   }
+
+//   // 1. Carregar skills do backend
+//   async loadSkills() {
+//     try {
+//       const skills = await firstValueFrom(this.projectService.getSkills());
+//       console.log('Habilidades carregadas do backend:', skills);
+//       this.allSkills = skills || [];
+//     } catch (error) {
+//       console.error('Erro ao carregar skills:', error);
+//       this.allSkills = [];
+//     }
+//   }
+
+//   // 2. Adicionar tarefa
+//   async addTask(task: any) {
+//     try {
+//       console.log('Adicionando tarefa:', task);
+
+//       const createdTask = await firstValueFrom(
+//         this.projectService.addTask({
+//           ...task,
+//           projectId: this.project._id,
+//           status: 'pendente',
+//           assignedUid: null,
+//         })
+//       );
+
+//       console.log('Tarefa criada no backend:', createdTask);
+//     } catch (error) {
+//       console.error('Erro ao adicionar tarefa:', error);
+//     }
+//   }
+
+//   // 3. Remover tarefa
+//   removeTask(index: number) {
+//     console.log('Removendo tarefa:', this.project.tasks[index]);
+//     this.project.tasks.splice(index, 1);
+//   }
+
+//   // 4. Adicionar skill
+//   addSkill() {
+//     if (this.newSkill) {
+//       console.log('Adicionando skill:', this.newSkill);
+//       this.project.skills.push(this.newSkill);
+//       this.newSkill = '';
+//     } else {
+//       console.error('Skill vazia não pode ser adicionada!');
+//     }
+//   }
+
+//   // 5. Remover skill
+//   removeSkill(index: number) {
+//     console.log('Removendo skill:', this.project.skills[index]);
+//     this.project.skills.splice(index, 1);
+//   }
+
+//   // 6. Criar o projeto (com tasks e skills)
+//   async createProject() {
+//     try {
+//       console.log('Enviando projeto para criação:', this.project);
+
+//       const formattedProject = {
+//         ...this.project,
+//         startDate: new Date(this.project.startDate).toISOString().split('T')[0],
+//         endDate: new Date(this.project.endDate).toISOString().split('T')[0],
+//       };
+
+//       const createdProject = await firstValueFrom(
+//         this.projectService.createProject(formattedProject)
+//       );
+
+//       if (createdProject && (createdProject as any).id) {
+//         this.project._id = (createdProject as any).id;
+//         console.log('Projeto criado com sucesso:', createdProject);
+
+//         // Criar tasks associadas ao projeto
+//         for (const task of this.project.tasks) {
+//           await this.addTask(task); // Passar a tarefa atual para ser criada
+//         }
+
+//         // Associar skills ao projeto
+//         await this.addSkillsToProject();
+
+//         const toast = await this.toastController.create({
+//           message: 'Projeto, tarefas e skills criados com sucesso!',
+//           duration: 2000,
+//           color: 'success',
+//         });
+//         toast.present();
+//       } else {
+//         throw new Error('Erro: O projeto criado não possui um _id.');
+//       }
+//     } catch (error) {
+//       const toast = await this.toastController.create({
+//         message: 'Erro ao criar projeto.',
+//         duration: 2000,
+//         color: 'danger',
+//       });
+//       toast.present();
+//       console.error(error);
+//     }
+//   }
+
+//   // 7. Associar skills ao projeto
+//   async addSkillsToProject() {
+//     try {
+//       const skillsPayload = {
+//         projectId: this.project._id,
+//         skills: this.project.skills, // Array de skills
+//       };
+
+//       console.log('Enviando skills ao backend:', skillsPayload);
+
+//       const response = await firstValueFrom(
+//         this.projectService.addSkillsToProject(skillsPayload)
+//       );
+
+//       console.log('Skills associadas ao projeto com sucesso:', response);
+//     } catch (error) {
+//       console.error('Erro ao associar skills ao projeto:', error);
+//     }
+//   }
+// }
+

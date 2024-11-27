@@ -1,81 +1,68 @@
-import {
-  IsArray,
-  IsDateString,
-  IsNotEmpty,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class CreateProjectDto {
   @IsString()
-  @IsNotEmpty()
   title: string;
 
   @IsString()
-  @IsNotEmpty()
   area: string;
 
-  @IsObject()
-  @IsOptional()
-  address?: Record<string, any>;
-
   @IsString()
-  @IsNotEmpty()
   organization: string;
 
   @IsString()
-  @IsNotEmpty()
   organizationEmail: string;
 
   @IsString()
-  @IsNotEmpty()
   organizationPhone: string;
 
-  @IsDateString()
-  @IsNotEmpty()
-  startDate: Date;
-
-  @IsDateString()
-  @IsOptional()
-  endDate?: Date;
-
-  @IsNumber()
-  @IsNotEmpty()
-  totalSpots: number;
-
   @IsString()
-  @IsNotEmpty()
-  description: string;
+  startDate: string;
 
-  @IsNumber()
   @IsOptional()
-  hoursValue?: number;
-
   @IsString()
-  @IsNotEmpty()
-  mainImage: string;
+  endDate?: string;
 
-  @IsArray()
   @IsOptional()
-  secondaryImages: string[];
+  @IsString()
+  startTime?: string;
 
-  @IsArray()
   @IsOptional()
-  resources?: Record<string, any>[];
+  @IsString()
+  endTime?: string;
 
-  @IsArray()
   @IsOptional()
-  skillsRequired?: string[]; // IDs de habilidades
+  @IsInt()
+  totalSpots?: number;
 
-  @IsArray()
   @IsOptional()
-  tasks?: string[]; // IDs de tarefas
+  @IsString()
+  description?: string;
 
-  // Adicionado: participants
+  @IsOptional()
+  @IsString()
+  mainImage?: string;
+
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  participants?: string[];
+  secondaryImages?: string[];
+
+  @IsOptional()
+  @IsArray()
+  resources?: any[];
+
+  @IsOptional()
+  @IsArray()
+  skillsRequired?: string[];
+
+  @IsOptional()
+  @IsArray()
+  tasks?: { name: string; description?: string; status?: string }[];
+
+  @IsOptional() //
+  address?: {
+    city: string;
+    state: string;
+    country: string;
+  };
 }

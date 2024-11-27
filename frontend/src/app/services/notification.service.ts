@@ -1,3 +1,4 @@
+//TESTE API NATIVA NOTIFICAÇÃO
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
@@ -9,16 +10,13 @@ export class NotificationService {
   constructor() {}
 
   async initializePushNotifications() {
-    // Solicita permissão para notificações push
     const permStatus = await PushNotifications.requestPermissions();
 
     if (permStatus.receive === 'granted') {
       await PushNotifications.register();
 
-      // Obtém o token do dispositivo
       PushNotifications.addListener('registration', (token: Token) => {
         console.log('Push registration success, token: ', token.value);
-        // Enviar token para o backend
       });
 
       PushNotifications.addListener('registrationError', (error) => {

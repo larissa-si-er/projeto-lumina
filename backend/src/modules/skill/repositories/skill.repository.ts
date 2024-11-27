@@ -1,25 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
 import { CreateSkillDto } from 'src/domain/dtos/skill/create-skill.dto';
-import { SkillEntity } from 'src/domain/entities/skill/skill.entity';
+import { PrismaService } from 'src/infra/database/prisma/prisma.service';
 
 @Injectable()
-export class SkillRepository extends RepositoryFactory<
-  SkillEntity,
-  CreateSkillDto,
-  any
-> {
-  constructor() {
-    super('skill');
-  }
+export class SkillRepository {
+  constructor(private readonly prisma: PrismaService) {}
 
-  async createSkill(data: CreateSkillDto): Promise<SkillEntity> {
-    return this.prismaService.skill.create({
-      data,
+  async create(createSkillDto: CreateSkillDto) {
+    // Cria uma nova skill no banco de dados
+    return await this.prisma.skill.create({
+      data: {
+        name: createSkillDto.name,
+      },
     });
-  }
-
-  async findAllSkills(): Promise<SkillEntity[]> {
-    return this.prismaService.skill.findMany();
   }
 }
