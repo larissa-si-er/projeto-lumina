@@ -78,20 +78,18 @@ model Project {
   endDate           String? // Armazena apenas a data (YYYY-MM-DD)
   startTime         String? // Armazena apenas a hora (HH:MM)
   endTime           String? // Armazena apenas a hora (HH:MM)
-  availableSpots    Int?
+  availableSpots    Int?                 @default(0)
   totalSpots        Int
   description       String
-  hoursValue        Int?
+  hoursValue        Float?               @default(0)
   mainImage         String
   secondaryImages   String[]
-  skillsRequired    ProjectSkill[] // Relacionamento many-to-many com Skill via tabela intermediária
+  resources         Json[]
+  skillsRequired    ProjectSkill[] // many-to-many com Skill via tabela intermediária
   participants      ProjectParticipant[] // Participantes do projeto
   tasks             Task[] // Relacionamento com Tarefas
-  meetings          Meeting[] // Relacionamento com Reuniões
-  certificates      Certificate[] // Relacionamento com certificados emitidos
-
-  // Recursos embutidos diretamente no projeto
-  resources Json[] // Array de objetos JSON para representar os recursos embutidos
+  meetings          Meeting[] // "  com Reuniões
+  certificates      Certificate[] // " com certificados emitidos
 
   createdAt DateTime @default(now())
 
@@ -141,12 +139,15 @@ model Task {
   projectId   String
   name        String?
   description String?
-  status      String?
+  deadline    String?
+  status      String? @default("pendente")
   assignedUid String? // Referência ao responsável (User)
   createdBy   String?
 
-  project      Project @relation(fields: [projectId], references: [id])
-  assignedUser User?   @relation(name: "AssignedTasks", fields: [assignedUid], references: [id])
+  project      Project  @relation(fields: [projectId], references: [id])
+  assignedUser User?    @relation(name: "AssignedTasks", fields: [assignedUid], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("tasks")
 }

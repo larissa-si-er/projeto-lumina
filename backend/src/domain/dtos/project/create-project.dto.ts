@@ -1,4 +1,11 @@
-import { IsArray, IsInt, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsDecimal,
+  IsInt,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateProjectDto {
   @IsString()
@@ -15,6 +22,13 @@ export class CreateProjectDto {
 
   @IsString()
   organizationPhone: string;
+
+  @IsOptional() //
+  address?: {
+    city: string;
+    state: string;
+    country: string;
+  };
 
   @IsString()
   startDate: string;
@@ -36,6 +50,14 @@ export class CreateProjectDto {
   totalSpots?: number;
 
   @IsOptional()
+  @IsInt()
+  availableSpots?: number;
+
+  @IsOptional()
+  @IsDecimal()
+  hoursValue?: number;
+
+  @IsOptional()
   @IsString()
   description?: string;
 
@@ -45,11 +67,13 @@ export class CreateProjectDto {
 
   @IsOptional()
   @IsArray()
-  secondaryImages?: string[];
+  @Type(() => String)
+  secondaryImages?: string[] | string;
 
   @IsOptional()
   @IsArray()
-  resources?: any[];
+  @Type(() => String)
+  resources?: string[] | string;
 
   @IsOptional()
   @IsArray()
@@ -58,11 +82,4 @@ export class CreateProjectDto {
   @IsOptional()
   @IsArray()
   tasks?: { name: string; description?: string; status?: string }[];
-
-  @IsOptional() //
-  address?: {
-    city: string;
-    state: string;
-    country: string;
-  };
 }

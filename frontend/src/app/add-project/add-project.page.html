@@ -83,6 +83,49 @@
       ></ion-textarea>
     </ion-item>
 
+    <ion-item>
+      <ion-label position="stacked">Hora de Início</ion-label>
+      <ion-input
+        [(ngModel)]="project.startTime"
+        placeholder="HH:MM"
+        type="time"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Hora de Término</ion-label>
+      <ion-input
+        [(ngModel)]="project.endTime"
+        placeholder="HH:MM"
+        type="time"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Recursos</ion-label>
+      <ion-textarea
+        [(ngModel)]="project.resources"
+        placeholder="Descreva os recursos necessários"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Valor por Hora</ion-label>
+      <ion-input
+        [(ngModel)]="project.hoursValue"
+        type="number"
+        placeholder="Ex.: 50.00"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Imagens Secundárias</ion-label>
+      <ion-input
+        [(ngModel)]="project.secondaryImages"
+        placeholder="URLs separadas por vírgulas"
+      ></ion-input>
+    </ion-item>
+
     <!-- Endereço -->
     <ion-item>
       <ion-label position="stacked">Cidade</ion-label>

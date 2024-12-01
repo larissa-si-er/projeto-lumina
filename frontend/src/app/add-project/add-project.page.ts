@@ -9,8 +9,13 @@ interface Project {
   organizationPhone: string;
   startDate: string;
   endDate: string;
+  startTime: '';
+  endTime: '';
   totalSpots: number;
+  hoursValue: 0;
   description: string;
+  secondaryImages: [];
+  resources: [];
   tasks: { name: string; description: string }[];
   skillsRequired: string[];
   mainImage?: string;
@@ -31,8 +36,13 @@ export class AddProjectPage {
     organizationPhone: '',
     startDate: '',
     endDate: '',
+    startTime: '',
+    endTime: '',
     totalSpots: 0,
+    hoursValue: 0,
     description: '',
+    secondaryImages: [],
+    resources: [],
     address: {
       city: '',
       state: '',
