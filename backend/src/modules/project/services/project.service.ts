@@ -12,12 +12,11 @@ export class ProjectService {
   ): Promise<ProjectEntity> {
     console.log('DTO recebido: ', createProjectDto);
 
-    // Normalizando os dados recebidos para garantir o formato correto
     const normalizedCreateProjectDto = {
       ...createProjectDto,
       secondaryImages: Array.isArray(createProjectDto.secondaryImages)
         ? createProjectDto.secondaryImages
-        : [createProjectDto.secondaryImages].filter((img) => img), // Filtra valores nulos ou undefined
+        : [createProjectDto.secondaryImages].filter((img) => img),
       resources: Array.isArray(createProjectDto.resources)
         ? createProjectDto.resources
         : [createProjectDto.resources].filter((res) => res),
@@ -67,14 +66,16 @@ export class ProjectService {
         },
       });
 
-      console.log('Projeto criado: ', createdProject);
+      const formattedSkills = createdProject.skillsRequired.map(
+        (skillRelation) => ({
+          id: skillRelation.skill.id,
+          name: skillRelation.skill.name,
+        }),
+      );
 
       return {
         ...createdProject,
-        skillsRequired: createdProject.skillsRequired.map((skillRelation) => ({
-          id: skillRelation.skill.id,
-          name: skillRelation.skill.name,
-        })),
+        skillsRequired: formattedSkills,
         tasks: createdProject.tasks.map((task) => ({
           id: task.id,
           name: task.name || '',
@@ -89,5 +90,45 @@ export class ProjectService {
       console.error('Erro ao criar projeto: ', error.message);
       throw error;
     }
+  }
+
+  async assignSkillsToProject(projectId: string, skills: string[]) {
+    const project = await this.prisma.project.findUnique({
+      where: { id: projectId },
+      include: { skillsRequired: true },
+    });
+
+    if (!project) {
+      throw new Error('Projeto não encontrado');
+    }
+
+    // habilidades - projeto
+    const skillsToAssign = await this.prisma.skill.findMany({
+      where: {
+        name: { in: skills },
+      },
+    });
+
+    if (skillsToAssign.length === 0) {
+      throw new Error('Nenhuma habilidade encontrada');
+    }
+
+    await this.prisma.project.update({
+      where: { id: projectId },
+      data: {
+        skillsRequired: {
+          connect: skillsToAssign.map((skill) => ({ id: skill.id })),
+        },
+      },
+    });
+
+    return { message: 'Habilidades associadas com sucesso ao projeto' };
+  }
+
+  addSkillsToProject(projectId: string, skills: string[]) {
+    console.log(
+      `Associando as habilidades ${skills.join(', ')} ao projeto ${projectId}`,
+    );
+    return { projectId, skills };
   }
 }

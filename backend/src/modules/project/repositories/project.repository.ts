@@ -17,7 +17,6 @@ export class ProjectRepository {
       ? data.resources
       : [data.resources].filter((resource) => resource);
 
-    //skills já existem ou criar novas
     for (const skillName of data.skillsRequired || []) {
       const existingSkill = await this.prisma.skill.findUnique({
         where: { name: skillName },
@@ -49,7 +48,7 @@ export class ProjectRepository {
         totalSpots: data.totalSpots,
         hoursValue: data.hoursValue,
         description: data.description,
-        mainImage: data.mainImage || '',
+        mainImage: data.mainImage || 'default_image_url',
         secondaryImages: normalizedSecondaryImages,
         resources: normalizedResources,
         skillsRequired: {

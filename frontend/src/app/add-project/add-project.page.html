@@ -103,18 +103,25 @@
 
     <ion-item>
       <ion-label position="stacked">Recursos</ion-label>
-      <ion-textarea
-        [(ngModel)]="project.resources"
-        placeholder="Descreva os recursos necessários"
-      ></ion-textarea>
+      <ion-input
+        [(ngModel)]="newResource"
+        placeholder="Digite um recurso"
+      ></ion-input>
+      <ion-button slot="end" (click)="addResource()"
+        >Adicionar Recurso</ion-button
+      >
+    </ion-item>
+
+    <ion-item *ngFor="let resource of project.resources; let i = index">
+      <ion-label>{{ resource }}</ion-label>
+      <ion-button slot="end" (click)="removeResource(i)">Remover</ion-button>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Valor por Hora</ion-label>
+      <ion-label position="stacked">Imagem Principal</ion-label>
       <ion-input
-        [(ngModel)]="project.hoursValue"
-        type="number"
-        placeholder="Ex.: 50.00"
+        [(ngModel)]="project.mainImage"
+        placeholder="URL da imagem principal"
       ></ion-input>
     </ion-item>
 
@@ -182,25 +189,59 @@
     <ion-button expand="block" (click)="addTask()">Adicionar Tarefa</ion-button>
 
     <!-- Skills -->
-    <ion-item-divider>Habilidades</ion-item-divider>
+    <!-- <ion-item-divider>Habilidades</ion-item-divider>
     <ion-item *ngFor="let skill of project.skillsRequired; let i = index">
       <ion-label>{{ skill }}</ion-label>
-      <ion-button (click)="removeSkill(i)">Remove</ion-button>
+      <ion-button slot="end" (click)="removeSkill(i)">Remover</ion-button>
     </ion-item>
 
+    <ion-item>
+      <ion-label position="stacked">Habilidade</ion-label>
+      <ion-input
+        [(ngModel)]="newSkill"
+        placeholder="Digite a habilidade necessária"
+      ></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="addSkill()"
+      >Adicionar Habilidade</ion-button
+    > -->
+    <!-- Habilidades -->
+    <ion-item-divider>Tarefas e Habilidades</ion-item-divider>
+
+    <!-- Seletor de Habilidade Existente -->
+    <ion-item>
+      <ion-label position="stacked">Habilidade Existente</ion-label>
+      <ion-select
+        [(ngModel)]="selectedSkill"
+        placeholder="Selecione uma habilidade"
+      >
+        <ion-select-option *ngFor="let skill of existingSkills" [value]="skill">
+          {{ skill }}
+        </ion-select-option>
+      </ion-select>
+      <ion-button slot="end" (click)="addExistingSkill()"
+        >Adicionar Habilidade</ion-button
+      >
+    </ion-item>
+
+    <!-- Se a habilidade nova for escolhida -->
     <ion-item>
       <ion-label position="stacked">Nova Habilidade</ion-label>
       <ion-input
         [(ngModel)]="newSkill"
-        placeholder="Adicione uma habilidade"
+        placeholder="Digite a nova habilidade"
       ></ion-input>
+      <ion-button slot="end" (click)="addSkill()"
+        >Adicionar Habilidade</ion-button
+      >
     </ion-item>
 
-    <ion-button expand="block" (click)="addSkill()"
-      >Adicionar Habilidade</ion-button
-    >
+    <!-- Exibição de Habilidades Selecionadas -->
+    <ion-item *ngFor="let skill of project.skillsRequired; let i = index">
+      <ion-label>{{ skill }}</ion-label>
+      <ion-button slot="end" (click)="removeSkill(i)">Remover</ion-button>
+    </ion-item>
 
-    <!-- Botão para criar projeto -->
     <ion-button expand="block" color="primary" (click)="createProject()"
       >Criar Projeto</ion-button
     >

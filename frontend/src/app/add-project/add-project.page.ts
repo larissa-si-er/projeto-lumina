@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
+import { SkillService } from '../services/skills.service';
 
 interface Project {
   title: string;
@@ -9,13 +10,13 @@ interface Project {
   organizationPhone: string;
   startDate: string;
   endDate: string;
-  startTime: '';
-  endTime: '';
+  startTime: string;
+  endTime: string;
   totalSpots: number;
-  hoursValue: 0;
+  hoursValue: number;
   description: string;
-  secondaryImages: [];
-  resources: [];
+  secondaryImages: string[];
+  resources: string[];
   tasks: { name: string; description: string }[];
   skillsRequired: string[];
   mainImage?: string;
@@ -27,7 +28,7 @@ interface Project {
   templateUrl: './add-project.page.html',
   styleUrls: ['./add-project.page.scss'],
 })
-export class AddProjectPage {
+export class AddProjectPage implements OnInit {
   project: Project = {
     title: '',
     area: '',
@@ -54,8 +55,27 @@ export class AddProjectPage {
 
   newSkill: string = '';
   newTask = { name: '', description: '' };
+  newResource: string = '';
+  existingSkills: string[] = []; // skills existentes
+  selectedSkill: string = ''; // skills selecionada
 
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private skillService: SkillService
+  ) {}
+
+  ngOnInit() {
+    this.loadExistingSkills();
+  }
+
+  loadExistingSkills() {
+    this.skillService.getSkills().subscribe({
+      next: (skills: any[]) => {
+        this.existingSkills = skills.map((skill) => skill.name);
+      },
+      error: (err: any) => console.error('Erro ao carregar habilidades:', err),
+    });
+  }
 
   addTask() {
     if (this.newTask.name && this.newTask.description) {
@@ -79,6 +99,17 @@ export class AddProjectPage {
     this.project.skillsRequired.splice(index, 1);
   }
 
+  addResource() {
+    if (this.newResource) {
+      this.project.resources.push(this.newResource);
+      this.newResource = '';
+    }
+  }
+
+  removeResource(index: number) {
+    this.project.resources.splice(index, 1);
+  }
+
   async createProject() {
     try {
       const payload = {
@@ -99,6 +130,17 @@ export class AddProjectPage {
       });
     } catch (error) {
       console.error('Erro inesperado ao criar o projeto:', error);
+    }
+  }
+
+  // Aqui associa uma skill existente ao projeto
+  addExistingSkill() {
+    if (
+      this.selectedSkill &&
+      !this.project.skillsRequired.includes(this.selectedSkill)
+    ) {
+      this.project.skillsRequired.push(this.selectedSkill);
+      this.selectedSkill = '';
     }
   }
 }

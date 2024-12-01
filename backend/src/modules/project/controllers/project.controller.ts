@@ -14,4 +14,12 @@ export class ProjectController {
     console.log('Dados recebidos no Controller: ', createProjectDto);
     return this.projectService.createProject(createProjectDto);
   }
+
+  @Post('skills')
+  async addSkillsToProject(
+    @Body() payload: { projectId: string; skills: string[] },
+  ) {
+    const { projectId, skills } = payload;
+    return this.projectService.addSkillsToProject(projectId, skills);
+  }
 }
