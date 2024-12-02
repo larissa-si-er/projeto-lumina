@@ -1,0 +1,149 @@
+ion-toolbar {
+  --background: #fff;
+  --border-width: 0 0 1px 0;
+  --border-color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 2%;
+  border: none;
+  box-shadow: none;
+}
+ion-back-button {
+  font-size: 17px;
+  color: rgba(193, 0, 93, 0.722);
+}
+
+.form-container {
+  padding: 16px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  padding: 8px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.secondary-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.secondary-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  padding: 4px;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.image-preview img {
+  width: 95%;
+  height: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  margin: 2%;
+}
+
+.ion-item {
+  margin: 2%;
+  width: 95%;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+ion-list {
+  background: #ececec;
+}
+
+input {
+  padding: 5px;
+}
+
+// .content-org,
+// .content-adress,
+// .content-hours,
+// .content-imgs {
+//   background-color: white;
+//   margin: 7% 2%;
+//   border-radius: 10px;
+//   padding: 4px;
+// }
+.content-org,
+.content-adress,
+.content-hours,
+.content-imgs,
+.content-tasks,
+.content-skills {
+  background-color: white;
+  margin: 7% 2%;
+  border-radius: 10px;
+  padding: 4px;
+
+  .title-adress,
+  .title-hours,
+  .title-imgs,
+  .title-org,
+  .title-task,
+  .title-skill {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons-content {
+    --background: #cccccc00;
+    color: deeppink;
+    --box-shadow: none;
+
+    .icon-button {
+      font-size: 33px;
+      margin: 0;
+      color: deeppink;
+    }
+  }
+
+  h4 {
+    color: gray;
+    font-weight: 700;
+    padding: 1px 15px;
+  }
+  ion-icon {
+    font-size: 52px;
+    color: rgb(162, 162, 162);
+    margin: -25px 20px -4px 0px;
+  }
+}
+
+.title {
+  width: 90%;
+  margin: 5%;
+
+  .line-title {
+    height: 1px;
+    width: 90%;
+    background-color: #888888;
+  }
+}
+
+.ion-button-resource {
+  font-size: 25px;
+  margin: 0;
+}

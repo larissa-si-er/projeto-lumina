@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular'; // Importando o NavController para navegação
 import { ProjectService } from '../services/project.service';
 import { SkillService } from '../services/skills.service';
+import { UploadService } from '../services/upload.service';
 
 interface Project {
   title: string;
@@ -15,11 +17,11 @@ interface Project {
   totalSpots: number;
   hoursValue: number;
   description: string;
-  secondaryImages: string[];
+  mainImage?: string | File; // Suporta URLs ou arquivos carregados
+  secondaryImages: (string | File)[]; // Suporta URLs ou arquivos carregados
   resources: string[];
   tasks: { name: string; description: string }[];
   skillsRequired: string[];
-  mainImage?: string;
   address: { city: string; state: string; country: string };
 }
 
@@ -56,12 +58,18 @@ export class AddProjectPage implements OnInit {
   newSkill: string = '';
   newTask = { name: '', description: '' };
   newResource: string = '';
-  existingSkills: string[] = []; // skills existentes
-  selectedSkill: string = ''; // skills selecionada
+  existingSkills: string[] = [];
+  selectedSkill: string = '';
+
+  // Variáveis para pré-visualização
+  mainImagePreview: string | ArrayBuffer | null = null;
+  secondaryImagesPreview: (string | ArrayBuffer | null)[] = [];
 
   constructor(
     private projectService: ProjectService,
-    private skillService: SkillService
+    private skillService: SkillService,
+    private uploadService: UploadService,
+    private navController: NavController // Injeta o NavController para navegação
   ) {}
 
   ngOnInit() {
@@ -115,6 +123,7 @@ export class AddProjectPage implements OnInit {
       const payload = {
         ...this.project,
         mainImage: this.project.mainImage || 'default_image_url',
+        secondaryImages: this.project.secondaryImages || [],
         address: this.project.address || {
           city: 'Default City',
           state: 'Default State',
@@ -124,8 +133,12 @@ export class AddProjectPage implements OnInit {
 
       console.log('Enviando projeto ao backend:', payload);
       this.projectService.createProject(payload).subscribe({
-        next: (response) =>
-          console.log('Projeto criado com sucesso:', response),
+        next: (response) => {
+          console.log('Projeto criado com sucesso:', response);
+
+          // Redireciona para a página Home após o sucesso da criação
+          this.navController.navigateForward('/tabs');
+        },
         error: (err) => console.error('Erro ao criar o projeto:', err),
       });
     } catch (error) {
@@ -133,7 +146,6 @@ export class AddProjectPage implements OnInit {
     }
   }
 
-  // Aqui associa uma skill existente ao projeto
   addExistingSkill() {
     if (
       this.selectedSkill &&
@@ -142,5 +154,46 @@ export class AddProjectPage implements OnInit {
       this.project.skillsRequired.push(this.selectedSkill);
       this.selectedSkill = '';
     }
+  }
+
+  // Método para pré-visualizar imagens antes de enviar
+  onMainImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.mainImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+
+      // Enviar a imagem ao backend
+      this.uploadService.uploadFiles([file]).subscribe({
+        next: (response) => {
+          this.project.mainImage = response.urls[0]; // Salva a URL retornada
+        },
+        error: (err) => console.error('Erro ao fazer upload da imagem:', err),
+      });
+    }
+  }
+
+  onSecondaryImagesSelected(event: any) {
+    const files = Array.from(event.target.files) as File[];
+    this.secondaryImagesPreview = []; // Limpa pré-visualizações anteriores
+
+    // Enviar as imagens ao backend
+    this.uploadService.uploadFiles(files).subscribe({
+      next: (response) => {
+        this.project.secondaryImages = response.urls; // Salva as URLs retornadas
+      },
+      error: (err) => console.error('Erro ao fazer upload das imagens:', err),
+    });
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.secondaryImagesPreview.push(reader.result);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 }

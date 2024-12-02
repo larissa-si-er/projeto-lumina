@@ -65,6 +65,10 @@ export class CreateProjectDto {
   @IsString()
   mainImage?: string;
 
+  // @IsOptional()
+  // @IsString()
+  // mainImage?: string | Prisma.JsonValue;
+
   @IsOptional()
   @IsArray()
   @Type(() => String)

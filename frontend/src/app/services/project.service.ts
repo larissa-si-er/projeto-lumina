@@ -24,4 +24,11 @@ export class ProjectService {
   addSkillsToProject(payload: any) {
     return this.http.post(`${this.apiUrl}/skills`, payload);
   }
+
+  uploadImages(formData: FormData) {
+    return this.http.post<string[]>(
+      'http://localhost:3000/projects/upload',
+      formData
+    );
+  }
 }

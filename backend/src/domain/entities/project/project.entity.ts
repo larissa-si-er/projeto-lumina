@@ -20,6 +20,8 @@ export class ProjectEntity {
   hoursValue?: number;
   mainImage: string;
   secondaryImages: string[];
+  // mainImage: Prisma.JsonValue;
+  // secondaryImages: Prisma.JsonValue[];
   resources: Prisma.JsonValue[];
   skillsRequired?: SkillEntity[]; // Relacionamento com SkillEntity
   tasks?: TaskEntity[]; // Relacionamento com TaskEntity

@@ -84,6 +84,8 @@ model Project {
   hoursValue        Float?               @default(0)
   mainImage         String
   secondaryImages   String[]
+  // mainImage         Json
+  // secondaryImages   Json[]
   resources         Json[]
   skillsRequired    ProjectSkill[] // many-to-many com Skill via tabela intermediária
   participants      ProjectParticipant[] // Participantes do projeto

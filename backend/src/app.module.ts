@@ -35,6 +35,9 @@ import { SkillModule } from './modules/skill/skill.module';
 import { TaskModule } from './modules/task/task.module';
 import { UserModule } from './modules/user/user.module';
 
+import { MulterModule } from '@nestjs/platform-express';
+import { UploadController } from './modules/upload/controllers/upload.controller';
+
 @Module({
   imports: [
     UserModule,
@@ -43,6 +46,11 @@ import { UserModule } from './modules/user/user.module';
     ProjectModule,
     TaskModule,
     SkillModule,
+    MulterModule.register({
+      dest: './uploads', // Diretório padrão
+    }),
   ], //ate o firebaseadmin, depois é alteraçao
+
+  controllers: [UploadController],
 })
 export class AppModule {}

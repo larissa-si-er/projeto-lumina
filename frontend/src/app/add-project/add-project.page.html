@@ -1,13 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Adicionar Projeto</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/projects"
+        icon="arrow-back-outline"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="back-image">
+    <img src="../../assets/img/back-add-project.png" alt="" srcset="" />
+  </div>
+  <div class="title">
+    <h1>Adicionar projeto</h1>
+    <div class="line-title"></div>
+  </div>
   <ion-list>
     <!-- Informações do projeto -->
-    <ion-item>
+    <ion-item class="ion-item">
       <ion-label position="stacked">Título</ion-label>
       <ion-input
         [(ngModel)]="project.title"
@@ -15,7 +28,7 @@
       ></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-item">
       <ion-label position="stacked">Área</ion-label>
       <ion-input
         [(ngModel)]="project.area"
@@ -23,32 +36,46 @@
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Organização</ion-label>
-      <ion-input
-        [(ngModel)]="project.organization"
-        placeholder="Nome da organização"
-      ></ion-input>
+    <ion-item class="ion-item">
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-textarea
+        [(ngModel)]="project.description"
+        placeholder="Descrição do projeto"
+      ></ion-textarea>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">E-mail da Organização</ion-label>
-      <ion-input
-        [(ngModel)]="project.organizationEmail"
-        type="email"
-        placeholder="email@exemplo.com"
-      ></ion-input>
-    </ion-item>
+    <div class="content-org">
+      <div class="title-org">
+        <h4>Informações:</h4>
+        <ion-icon name="business"></ion-icon>
+      </div>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Organização</ion-label>
+        <ion-input
+          [(ngModel)]="project.organization"
+          placeholder="Nome da organização"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Telefone da Organização</ion-label>
-      <ion-input
-        [(ngModel)]="project.organizationPhone"
-        placeholder="Telefone"
-      ></ion-input>
-    </ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">E-mail da Organização</ion-label>
+        <ion-input
+          [(ngModel)]="project.organizationEmail"
+          type="email"
+          placeholder="email@exemplo.com"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Telefone da Organização</ion-label>
+        <ion-input
+          [(ngModel)]="project.organizationPhone"
+          placeholder="Telefone"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item class="ion-item">
       <ion-label position="stacked">Data de Início</ion-label>
       <ion-datetime
         [(ngModel)]="project.startDate"
@@ -57,7 +84,7 @@
       ></ion-datetime>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-item">
       <ion-label position="stacked">Data de Término</ion-label>
       <ion-datetime
         [(ngModel)]="project.endDate"
@@ -66,7 +93,7 @@
       ></ion-datetime>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-item">
       <ion-label position="stacked">Número de Vagas</ion-label>
       <ion-input
         [(ngModel)]="project.totalSpots"
@@ -75,171 +102,229 @@
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Descrição</ion-label>
-      <ion-textarea
-        [(ngModel)]="project.description"
-        placeholder="Descrição do projeto"
-      ></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Hora de Início</ion-label>
+    <!-- Campo Valor em Horas -->
+    <ion-item class="ion-item">
+      <ion-label position="stacked">Valor das Horas voluntárias</ion-label>
       <ion-input
-        [(ngModel)]="project.startTime"
-        placeholder="HH:MM"
-        type="time"
+        [(ngModel)]="project.hoursValue"
+        type="number"
+        placeholder="Insira o valor em horas"
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Hora de Término</ion-label>
-      <ion-input
-        [(ngModel)]="project.endTime"
-        placeholder="HH:MM"
-        type="time"
-      ></ion-input>
-    </ion-item>
+    <div class="content-hours">
+      <div class="title-hours">
+        <h4>Horários</h4>
+        <ion-icon name="time"></ion-icon>
+      </div>
 
-    <ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Hora de Início</ion-label>
+        <ion-input
+          [(ngModel)]="project.startTime"
+          placeholder="HH:MM"
+          type="time"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Hora de Término</ion-label>
+        <ion-input
+          [(ngModel)]="project.endTime"
+          placeholder="HH:MM"
+          type="time"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item class="ion-item">
       <ion-label position="stacked">Recursos</ion-label>
       <ion-input
         [(ngModel)]="newResource"
         placeholder="Digite um recurso"
       ></ion-input>
       <ion-button slot="end" (click)="addResource()"
-        >Adicionar Recurso</ion-button
-      >
+        ><ion-icon
+          class="ion-button-resource"
+          name="add-circle-outline"
+        ></ion-icon
+      ></ion-button>
     </ion-item>
 
-    <ion-item *ngFor="let resource of project.resources; let i = index">
+    <ion-item
+      *ngFor="let resource of project.resources; let i = index"
+      class="ion-item"
+    >
       <ion-label>{{ resource }}</ion-label>
-      <ion-button slot="end" (click)="removeResource(i)">Remover</ion-button>
+
+      <ion-buttons slot="end">
+        <ion-button slot="end" color="danger" (click)="removeResource(i)"
+          ><ion-icon name="trash"></ion-icon
+        ></ion-button>
+      </ion-buttons>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Imagem Principal</ion-label>
-      <ion-input
-        [(ngModel)]="project.mainImage"
-        placeholder="URL da imagem principal"
-      ></ion-input>
-    </ion-item>
+    <div class="content-imgs">
+      <div class="title-imgs">
+        <h4>Imagens</h4>
+        <ion-icon name="images"></ion-icon>
+      </div>
 
-    <ion-item>
-      <ion-label position="stacked">Imagens Secundárias</ion-label>
-      <ion-input
-        [(ngModel)]="project.secondaryImages"
-        placeholder="URLs separadas por vírgulas"
-      ></ion-input>
-    </ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Imagem Principal</ion-label>
+        <input
+          type="file"
+          (change)="onMainImageSelected($event)"
+          accept="image/*"
+        />
+      </ion-item>
+      <div *ngIf="mainImagePreview" class="image-preview">
+        <img
+          [src]="mainImagePreview"
+          alt="Pré-visualização da Imagem Principal"
+        />
+      </div>
+
+      <!-- Imagens Secundárias -->
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Imagens Secundárias</ion-label>
+        <input
+          type="file"
+          (change)="onSecondaryImagesSelected($event)"
+          multiple
+          accept="image/*"
+        />
+      </ion-item>
+      <div *ngIf="secondaryImagesPreview.length" class="image-preview">
+        <div *ngFor="let img of secondaryImagesPreview">
+          <img [src]="img" alt="Pré-visualização de Imagem Secundária" />
+        </div>
+      </div>
+    </div>
 
     <!-- Endereço -->
-    <ion-item>
-      <ion-label position="stacked">Cidade</ion-label>
-      <ion-input
-        [(ngModel)]="project.address.city"
-        placeholder="Cidade"
-      ></ion-input>
-    </ion-item>
+    <div class="content-adress">
+      <div class="title-adress">
+        <h4>Local</h4>
+        <ion-icon name="compass"></ion-icon>
+      </div>
 
-    <ion-item>
-      <ion-label position="stacked">Estado</ion-label>
-      <ion-input
-        [(ngModel)]="project.address.state"
-        placeholder="Estado"
-      ></ion-input>
-    </ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Cidade</ion-label>
+        <ion-input
+          [(ngModel)]="project.address.city"
+          placeholder="Cidade"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">País</ion-label>
-      <ion-input
-        [(ngModel)]="project.address.country"
-        placeholder="País"
-      ></ion-input>
-    </ion-item>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Estado</ion-label>
+        <ion-input
+          [(ngModel)]="project.address.state"
+          placeholder="Estado"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-item">
+        <ion-label position="stacked">País</ion-label>
+        <ion-input
+          [(ngModel)]="project.address.country"
+          placeholder="País"
+        ></ion-input>
+      </ion-item>
+    </div>
 
     <!-- Tarefas -->
-    <ion-item-divider>Tarefas</ion-item-divider>
-    <ion-item *ngFor="let task of project.tasks; let i = index">
+    <div class="content-tasks">
+      <div class="title-task">
+        <h4>Tarefas</h4>
+      </div>
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Título da Tarefa</ion-label>
+        <ion-input
+          [(ngModel)]="newTask.name"
+          placeholder="Título da tarefa"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Descrição da Tarefa</ion-label>
+        <ion-textarea
+          [(ngModel)]="newTask.description"
+          placeholder="Descrição da tarefa"
+        ></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" (click)="addTask()" class="buttons-content"
+        >Adicionar Tarefa</ion-button
+      >
+    </div>
+
+    <ion-item
+      *ngFor="let task of project.tasks; let i = index"
+      class="ion-item"
+    >
       <ion-label>
         <h2>{{ task.name }}</h2>
         <p>{{ task.description }}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button color="danger" (click)="removeTask(i)">Remover</ion-button>
+        <ion-button color="danger" (click)="removeTask(i)"
+          ><ion-icon name="trash"></ion-icon
+        ></ion-button>
       </ion-buttons>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Título da Tarefa</ion-label>
-      <ion-input
-        [(ngModel)]="newTask.name"
-        placeholder="Título da tarefa"
-      ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Descrição da Tarefa</ion-label>
-      <ion-textarea
-        [(ngModel)]="newTask.description"
-        placeholder="Descrição da tarefa"
-      ></ion-textarea>
-    </ion-item>
-
-    <ion-button expand="block" (click)="addTask()">Adicionar Tarefa</ion-button>
-
-    <!-- Skills -->
-    <!-- <ion-item-divider>Habilidades</ion-item-divider>
-    <ion-item *ngFor="let skill of project.skillsRequired; let i = index">
-      <ion-label>{{ skill }}</ion-label>
-      <ion-button slot="end" (click)="removeSkill(i)">Remover</ion-button>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Habilidade</ion-label>
-      <ion-input
-        [(ngModel)]="newSkill"
-        placeholder="Digite a habilidade necessária"
-      ></ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="addSkill()"
-      >Adicionar Habilidade</ion-button
-    > -->
     <!-- Habilidades -->
-    <ion-item-divider>Tarefas e Habilidades</ion-item-divider>
+    <div class="content-skills">
+      <div class="title-skill">
+        <h4>Habilidades</h4>
+      </div>
+      <!-- Seletor de Habilidade Existente -->
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Habilidades</ion-label>
+        <ion-select
+          [(ngModel)]="selectedSkill"
+          placeholder="Selecione uma habilidade"
+        >
+          <ion-select-option
+            *ngFor="let skill of existingSkills"
+            [value]="skill"
+          >
+            {{ skill }}
+          </ion-select-option>
+        </ion-select>
+        <ion-button
+          slot="end"
+          (click)="addExistingSkill()"
+          class="buttons-content"
+          ><ion-icon class="icon-button" name="checkmark-circle"></ion-icon
+        ></ion-button>
+      </ion-item>
 
-    <!-- Seletor de Habilidade Existente -->
-    <ion-item>
-      <ion-label position="stacked">Habilidade Existente</ion-label>
-      <ion-select
-        [(ngModel)]="selectedSkill"
-        placeholder="Selecione uma habilidade"
-      >
-        <ion-select-option *ngFor="let skill of existingSkills" [value]="skill">
-          {{ skill }}
-        </ion-select-option>
-      </ion-select>
-      <ion-button slot="end" (click)="addExistingSkill()"
-        >Adicionar Habilidade</ion-button
-      >
-    </ion-item>
-
-    <!-- Se a habilidade nova for escolhida -->
-    <ion-item>
-      <ion-label position="stacked">Nova Habilidade</ion-label>
-      <ion-input
-        [(ngModel)]="newSkill"
-        placeholder="Digite a nova habilidade"
-      ></ion-input>
-      <ion-button slot="end" (click)="addSkill()"
-        >Adicionar Habilidade</ion-button
-      >
-    </ion-item>
-
+      <!-- Se a habilidade nova for escolhida -->
+      <ion-item class="ion-item">
+        <ion-label position="stacked">Outra:</ion-label>
+        <ion-input
+          [(ngModel)]="newSkill"
+          placeholder="Digite a nova habilidade"
+        ></ion-input>
+        <ion-button slot="end" (click)="addSkill()" class="buttons-content"
+          ><ion-icon class="icon-button" name="checkmark-circle"></ion-icon
+        ></ion-button>
+      </ion-item>
+    </div>
     <!-- Exibição de Habilidades Selecionadas -->
-    <ion-item *ngFor="let skill of project.skillsRequired; let i = index">
+    <ion-item
+      *ngFor="let skill of project.skillsRequired; let i = index"
+      class="ion-item"
+    >
       <ion-label>{{ skill }}</ion-label>
-      <ion-button slot="end" (click)="removeSkill(i)">Remover</ion-button>
+      <ion-buttons>
+        <ion-button slot="end" color="danger" (click)="removeSkill(i)"
+          ><ion-icon name="trash"></ion-icon
+        ></ion-button>
+      </ion-buttons>
     </ion-item>
 
     <ion-button expand="block" color="primary" (click)="createProject()"
