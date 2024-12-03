@@ -1,26 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
-  constructor() {}
-}
-// import { Component } from '@angular/core';
-// import { InfiniteScrollCustomEvent } from '@ionic/angular';
+export class HomePage implements OnInit {
+  projects: any[] = []; // Array para armazenar os projetos
 
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: 'home.page.html',
-//   styleUrls: ['home.page.scss'],
-// })
-// export class HomePage {
-//   loadMore(event: InfiniteScrollCustomEvent) {
-//     setTimeout(() => {
-//       // Lógica para carregar mais itens, você pode carregar mais dados aqui
-//       event.target.complete();
-//     }, 1000);
-//   }
-// }
+  constructor(private projectService: ProjectService) {}
+
+  ngOnInit() {
+    this.loadProjects();
+  }
+
+  loadProjects() {
+    // Chama o serviço que vai buscar os projetos no backend
+    this.projectService.getProjects().subscribe({
+      next: (response: any) => {
+        this.projects = response; // Atribui os projetos à variável `projects`
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar projetos:', err);
+      },
+    });
+  }
+}

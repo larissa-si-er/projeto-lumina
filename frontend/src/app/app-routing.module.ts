@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { VolunteerDetailsPage } from './tabs/volunteer-details/volunteer-details.page';
 
 const routes: Routes = [
   {
@@ -19,27 +20,43 @@ const routes: Routes = [
   },
   {
     path: 'volunteer-details',
-    loadChildren: () => import('./tabs/volunteer-details/volunteer-details.module').then( m => m.VolunteerDetailsPageModule)
+    loadChildren: () =>
+      import('./tabs/volunteer-details/volunteer-details.module').then(
+        (m) => m.VolunteerDetailsPageModule
+      ),
+  },
+  {
+    path: 'volunteer-details/:id', // A rota com o parâmetro "id"
+    component: VolunteerDetailsPage,
   },
   {
     path: 'cadastro',
-    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
+    loadChildren: () =>
+      import('./cadastro/cadastro.module').then((m) => m.CadastroPageModule),
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'project',
-    loadChildren: () => import('./project/project.module').then( m => m.ProjectPageModule)
+    loadChildren: () =>
+      import('./project/project.module').then((m) => m.ProjectPageModule),
   },
   {
     path: 'hours-detail',
-    loadChildren: () => import('./hours-detail/hours-detail.module').then( m => m.HoursDetailPageModule)
+    loadChildren: () =>
+      import('./hours-detail/hours-detail.module').then(
+        (m) => m.HoursDetailPageModule
+      ),
   },
   {
     path: 'add-project',
-    loadChildren: () => import('./add-project/add-project.module').then( m => m.AddProjectPageModule)
+    loadChildren: () =>
+      import('./add-project/add-project.module').then(
+        (m) => m.AddProjectPageModule
+      ),
   },
 ];
 

@@ -39,8 +39,10 @@ ion-back-button {
 }
 
 .overlay-card {
-  width: 100px;
-  height: 100px;
+  // width: 100px;
+  // height: 100px;
+  width: 150px;
+  height: 167px;
   margin: 0 5px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -49,17 +51,18 @@ ion-back-button {
   align-items: center;
   justify-content: center;
   background-color: white;
-  padding: 1px 5px 5px;
+  // padding: 1px 5px 5px;
+  padding: 8px 9px 40px 9px;
 }
 
 .overlay-card ion-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .details-card {
-  margin-top: 100px;
+  margin-top: 140px;
   padding: 15px;
   border-radius: 15px;
 }
@@ -87,4 +90,62 @@ ion-back-button {
 .skills ion-chip {
   margin-right: 8px;
   margin-top: 5px;
+}
+
+.project-details {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+}
+
+.detail-item {
+  margin-bottom: 16px; /* Espaçamento entre os itens */
+}
+
+.detail-item-label {
+  display: block; /* Faz com que o título ocupe toda a largura */
+  font-weight: 600;
+  color: #e000a1;
+  margin-bottom: 8px; /* Espaçamento entre o título e a linha divisória */
+}
+
+.detail-item-value {
+  font-size: 16px;
+  color: #333;
+}
+
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 8px 0; /* Espaço acima e abaixo da linha */
+}
+
+.inline-items {
+  display: flex;
+  gap: 16px;
+}
+
+.inline-items .detail-item {
+  flex: 1;
+}
+
+.resource-list {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skills-list ion-chip {
+  background-color: #ffd8f1;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: oblique;
 }

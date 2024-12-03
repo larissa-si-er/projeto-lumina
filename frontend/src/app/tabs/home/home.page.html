@@ -25,31 +25,6 @@
     <ion-icon name="funnel-outline" class="icon"></ion-icon>
   </div>
 
-  <!-- Seção Notícias -->
-  <h2 class="section-title">Notícias</h2>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card class="news-card">
-          <ion-img src="../../../assets/img/news1.png"></ion-img>
-          <ion-card-content class="news-content">
-            <p class="news-date">18/08/2021</p>
-            <p class="news-text">Preocupação ambiental em SP</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="news-card">
-          <ion-img src="../../../assets/img/news2.png"></ion-img>
-          <ion-card-content class="news-content">
-            <p class="news-date">18/08/2021</p>
-            <p class="news-text">Preocupação ambiental em SP</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
   <!-- Seção Ações de Voluntariado -->
   <h2 class="section-title">Ações do Voluntariado</h2>
   <div class="filters">
@@ -57,58 +32,71 @@
     <ion-button class="filter-button">Recente</ion-button>
   </div>
 
-  <!-- Card Voluntariado -->
-  <ion-card class="volunteer-card">
-    <!-- Imagem do Cartão com Legenda da Empresa -->
-    <ion-img
-      src="../../../assets/img/imgcard.png"
-      class="volunteer-img"
-    ></ion-img>
+  <!-- Lista de Ações de Voluntariado -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" *ngFor="let project of projects">
+        <ion-card class="volunteer-card">
+          <!-- Imagem do Cartão com Legenda da Empresa -->
+          <ion-img
+            [src]="project.mainImage || '../../../assets/img/default-card.png'"
+            class="volunteer-img"
+          ></ion-img>
 
-    <div class="image-caption">
-      <span class="company-name">Empresa XYZ</span>
-    </div>
-
-    <!-- Conteúdo do Card -->
-    <ion-card-content class="volunteer-content">
-      <!-- Nome da Ação Social e Link de Mais Informações -->
-      <div class="volunteer-header">
-        <h3 class="volunteer-action-name">Ação Exemplo</h3>
-        <a routerLink="/volunteer-details" class="volunteer-link"
-          >+ Mais info.</a
-        >
-      </div>
-
-      <!-- Separador -->
-      <ion-segment class="segment-separator"></ion-segment>
-
-      <!-- Estatísticas de Voluntariado (Vagas) e Botão Participar -->
-      <div class="volunteer-stats">
-        <!-- Ícones com Total de Vagas e Vagas Disponíveis -->
-        <div class="volunteer-stat">
-          <div class="stat-icon total">
-            <ion-icon name="person"></ion-icon>
-            <span class="stat-number">20</span>
+          <div class="image-caption">
+            <span class="company-name">{{ project.organization }}</span>
           </div>
-          <span class="stat-label">Total</span>
-        </div>
-        <div class="volunteer-stat">
-          <div class="stat-icon disponivel">
-            <ion-icon name="person"></ion-icon>
-            <span class="stat-number">3</span>
-          </div>
-          <span class="stat-label">Disponíveis</span>
-        </div>
 
-        <!-- Botão Participar -->
-        <div class="volunteer-participate">
-          <ion-button class="participate-button">
-            <ion-icon slot="start" name="hand-left-outline"></ion-icon>
-          </ion-button>
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
+          <!-- Conteúdo do Card -->
+          <ion-card-content class="volunteer-content">
+            <!-- Nome da Ação Social e Link de Mais Informações -->
+            <div class="volunteer-header">
+              <h3 class="volunteer-action-name">{{ project.title }}</h3>
+              <a
+                [routerLink]="['/volunteer-details', project.id]"
+                class="volunteer-link"
+                >+ Mais info.</a
+              >
+            </div>
+
+            <!-- Separador -->
+            <ion-segment class="segment-separator"></ion-segment>
+
+            <!-- Estatísticas de Voluntariado (Vagas) e Botão Participar -->
+            <div class="volunteer-stats">
+              <div class="volunteer-stat">
+                <div class="stat-icon total">
+                  <ion-icon name="person"></ion-icon>
+                  <span class="stat-number">{{ project.totalSpots }}</span>
+                </div>
+                <span class="stat-label">Total</span>
+              </div>
+              <div class="volunteer-stat">
+                <div class="stat-icon disponivel">
+                  <ion-icon name="person"></ion-icon>
+                  <span class="stat-number"
+                    >{{ project.totalSpots - project.filledSpots }}</span
+                  >
+                </div>
+                <span class="stat-label">Disponíveis</span>
+              </div>
+
+              <!-- Botão Participar -->
+              <div class="volunteer-participate">
+                <ion-button
+                  class="participate-button"
+                  [routerLink]="'/volunteer-signup/' + project.id"
+                >
+                  <ion-icon slot="start" name="hand-left-outline"></ion-icon>
+                  Participar
+                </ion-button>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <!-- Botão Flutuante de Ação -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -116,13 +104,4 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <!-- Scroll Infinito para as Notícias -->
-  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Carregando mais notícias..."
-    >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
 </ion-content>

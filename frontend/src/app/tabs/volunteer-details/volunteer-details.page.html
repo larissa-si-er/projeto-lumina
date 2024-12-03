@@ -1,67 +1,140 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/"
-        icon="arrow-back-outline"
-        text=""
-      ></ion-back-button>
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Imagem de fundo e cards sobrepostos -->
-  <div class="image-container">
-    <ion-img
-      class="background-image"
-      src="../../../assets/img/imgcard.png"
-    ></ion-img>
+  <ion-loading
+    [isOpen]="isLoading"
+    message="Carregando..."
+    duration="6000"
+  ></ion-loading>
+  <div *ngIf="project">
+    <div class="image-container">
+      <ion-img class="background-image" [src]="project.mainImage"></ion-img>
+    </div>
 
-    <!-- Cards com as imagens -->
     <div class="cards-container">
-      <ion-card class="overlay-card">
-        <ion-img
-          src="https://storage.googleapis.com/novo-blog-wordpress/2023/06/66b7abfe-temas-sobre-meio-ambiente.jpg"
-        ></ion-img>
-      </ion-card>
-      <ion-card class="overlay-card">
-        <ion-img
-          src="https://www.lancers.com.br/wp-content/uploads/2024/06/imagem-blog-1024x574.jpg"
-        ></ion-img>
-      </ion-card>
-      <ion-card class="overlay-card">
-        <ion-img
-          src="https://www.luziania.go.gov.br/wp-content/uploads/2023/07/tamb_10dicas.png"
-        ></ion-img>
+      <ion-card
+        class="overlay-card"
+        *ngFor="let img of project.secondaryImages"
+      >
+        <ion-img [src]="img"></ion-img>
       </ion-card>
     </div>
-  </div>
 
-  <!-- Seção de informações da ação de voluntariado -->
-  <ion-card class="details-card">
-    <ion-card-content>
-      <h3>Ação do povo</h3>
-      <p>
-        <strong>Descrição:</strong> Uma ação para a casa do povo com incentivo à
-        educação ambiental e coleta de lixos em áreas afetadas.
-      </p>
-      <p><strong>Local:</strong> Casa do povo</p>
-      <p><strong>Data início:</strong> 14/10/2021</p>
-      <p><strong>Horário início:</strong> 16:32</p>
-      <p><strong>Vale-horas (opcional):</strong> 4h</p>
-      <p><strong>Voluntários interessados:</strong></p>
-      <ul>
-        <li>usuario1gmail.com</li>
-        <li>usuario2gmail.com</li>
-        <li>usuario3gmail.com</li>
-      </ul>
-      <p><strong>Habilidades (opcional):</strong></p>
-      <div class="skills">
-        <ion-chip color="primary">Administração</ion-chip>
-        <ion-chip color="secondary">Cozinha</ion-chip>
-        <ion-chip color="tertiary">Ambiente</ion-chip>
-      </div>
-    </ion-card-content>
-  </ion-card>
+    <ion-card class="details-card">
+      <ion-card-content>
+        <h3>{{ project.title }}</h3>
+
+        <!-- Detalhes do Projeto -->
+        <div class="project-details">
+          <div class="detail-item">
+            <label class="detail-item-label">Área:</label>
+            <div class="detail-item-value">{{ project.area }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Organização:</label>
+            <div class="detail-item-value">{{ project.organization }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Email da Organização:</label>
+            <div class="detail-item-value">{{ project.organizationEmail }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Telefone da Organização:</label>
+            <div class="detail-item-value">{{ project.organizationPhone }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Descrição:</label>
+            <div class="detail-item-value">{{ project.description }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+
+          <!-- Local -->
+          <div class="detail-item">
+            <label class="detail-item-label">Local:</label>
+            <div class="detail-item-value">
+              {{ project.address ? (project.address.city + ', ' +
+              project.address.state + ', ' + project.address.country) : 'Não
+              informado' }}
+            </div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+
+          <div class="detail-item">
+            <label class="detail-item-label">Data de Início:</label>
+            <div class="detail-item-value">{{ project.startDate | date }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Data de Fim:</label>
+            <div class="detail-item-value">{{ project.endDate | date }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Horário de Início:</label>
+            <div class="detail-item-value">{{ project.startTime }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+          <div class="detail-item">
+            <label class="detail-item-label">Horário de Fim:</label>
+            <div class="detail-item-value">{{ project.endTime }}</div>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+
+          <!-- Total de Vagas e Vale-Horas lado a lado -->
+          <div class="inline-items">
+            <div class="detail-item">
+              <label class="detail-item-label">Total de Vagas:</label>
+              <div class="detail-item-value">{{ project.totalSpots }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-item-label">Vale-Horas:</label>
+              <div class="detail-item-value">{{ project.hoursValue }}h</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <!-- Linha divisória -->
+
+          <!-- Recursos como lista -->
+          <div class="detail-item">
+            <label class="detail-item-label">Recursos:</label>
+            <ul class="resource-list">
+              <li *ngFor="let resource of project.resources">{{ resource }}</li>
+            </ul>
+            <div class="divider"></div>
+            <!-- Linha divisória -->
+          </div>
+        </div>
+
+        <!-- Habilidades Necessárias -->
+        <div class="skills">
+          <strong>Habilidades Necessárias:</strong>
+          <div class="skills-list">
+            <ion-chip *ngFor="let skill of project.skillsRequired">
+              {{ skill.name }}
+            </ion-chip>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

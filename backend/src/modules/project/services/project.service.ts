@@ -28,6 +28,17 @@ export class ProjectService {
         : [createProjectDto.skillsRequired].filter((skill) => skill),
     };
 
+    const formattedStartDate = new Date(normalizedCreateProjectDto.startDate)
+      .toISOString()
+      .split('T')[0]; // Formato YYYY-MM-DD
+    const formattedEndDate = normalizedCreateProjectDto.endDate
+      ? new Date(normalizedCreateProjectDto.endDate).toISOString().split('T')[0] // Formato YYYY-MM-DD
+      : null;
+
+    // Aquii tribui as datas formatadas ao DTO
+    normalizedCreateProjectDto.startDate = formattedStartDate;
+    normalizedCreateProjectDto.endDate = formattedEndDate;
+
     try {
       const createdProject = await this.prisma.project.create({
         data: {
@@ -130,5 +141,36 @@ export class ProjectService {
       `Associando as habilidades ${skills.join(', ')} ao projeto ${projectId}`,
     );
     return { projectId, skills };
+  }
+
+  //buscar projetos
+  async getAllProjects(): Promise<ProjectEntity[]> {
+    const projects = await this.prisma.project.findMany();
+
+    return projects.map((project) => ({
+      ...project,
+      mainImage: typeof project.mainImage === 'string' ? project.mainImage : '',
+    }));
+  }
+
+  async getProjectById(id: string): Promise<ProjectEntity> {
+    const project = await this.prisma.project.findUnique({
+      where: { id },
+      include: { tasks: true, skillsRequired: { include: { skill: true } } },
+    });
+
+    if (!project) {
+      throw new Error('Projeto não encontrado');
+    }
+
+    const formattedSkills = project.skillsRequired.map((skillRelation) => ({
+      id: skillRelation.skill.id,
+      name: skillRelation.skill.name, // Isso garante que o nome está presente
+    }));
+
+    return {
+      ...project,
+      skillsRequired: formattedSkills,
+    };
   }
 }
