@@ -51,8 +51,23 @@ export class AuthService {
   }
 
   // Método para login com email e senha
+  // async loginWithEmail(email: string, password: string) {
+  //   return this.afAuth.signInWithEmailAndPassword(email, password);
+  // }
+
+  // Método para login com email e senha
   async loginWithEmail(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    const userCredential = await this.afAuth.signInWithEmailAndPassword(
+      email,
+      password
+    );
+
+    // Salvar o userId após o login
+    if (userCredential.user) {
+      this.saveUserId(userCredential.user.uid);
+    }
+
+    return userCredential;
   }
 
   // Método para logout
@@ -63,5 +78,23 @@ export class AuthService {
   // Método para observar o estado de autenticação
   getUser() {
     return this.afAuth.authState;
+  }
+
+  // Salvar userId no localStorage
+  saveUserId(userId: string): void {
+    localStorage.setItem('userId', userId);
+  }
+
+  // Retorna o userId armazenado
+  getUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+
+  // Buscar informações do usuário através do userId
+  async getUserDetails(userId: string) {
+    // Você pode chamar a API do backend para pegar as informações do usuário com base no userId
+    // Exemplo de chamada à API
+    const response = await fetch(`http://seu-backend/api/user/${userId}`);
+    return await response.json();
   }
 }

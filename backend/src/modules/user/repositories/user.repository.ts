@@ -9,6 +9,12 @@ export class UserRepository extends RepositoryFactory<
   CreateUserDto,
   UpdateUserDto
 > {
+  // findUnique(arg0: { where: { id: string; }; }) {
+  //   throw new Error('Method not implemented.');
+  // }
+  // findOne(arg0: { where: { id: string } }) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor() {
     super('user');
   }
@@ -30,6 +36,14 @@ export class UserRepository extends RepositoryFactory<
     return this.prismaService.user.findUnique({
       where: {
         email, // Aqui o prisma reconhece o email como um campo único
+      },
+    });
+  }
+
+  async findUnique(id: string): Promise<UserEntity | null> {
+    return this.prismaService.user.findUnique({
+      where: {
+        id,
       },
     });
   }

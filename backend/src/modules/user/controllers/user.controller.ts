@@ -14,7 +14,14 @@
 // }
 
 //testeando notificação::::::
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/domain/dtos';
 import { UserEntity } from 'src/domain/entities';
 import { FirebaseAdminService } from 'src/infra/services/firebase-admin.service'; // Importa o serviço de notificações
@@ -44,28 +51,13 @@ export class UserController {
       message,
     );
   }
+
+  @Get(':userId')
+  async getUser(@Param('userId') userId: string) {
+    const user = await this.userService.findById(userId);
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+    return user;
+  }
 }
-
-// import { Body, Controller, Post, Headers } from '@nestjs/common';
-// import { CreateUserDto } from 'src/domain/dtos';
-// import { UserEntity } from 'src/domain/entities';
-// import { UserService } from '../services/user.service';
-
-// @Controller('user')
-// export class UserController {
-//   constructor(private readonly userService: UserService) {}
-
-//   @Post()
-//   async createUser(
-//     @Body() createUserDto: CreateUserDto,
-//     @Headers('Authorization') authHeader: string, // Token JWT vem no cabeçalho
-//   ): Promise<UserEntity> {
-//     if (!authHeader) {
-//       throw new Error('Authorization header is missing');
-//     }
-
-//     const token = authHeader.split(' ')[1]; // Remove o "Bearer" do token
-
-//     return this.userService.create(createUserDto, token);
-//   }
-// }

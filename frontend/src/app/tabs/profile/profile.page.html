@@ -1,258 +1,3 @@
-<!-- <ion-header [translucent]="true" class="custom-header">
-  <ion-toolbar>
-    <img src="../../assets/img/logo-icon.png" alt="logo-icon" class="logo-icon" slot="start">
-    <img src="../../assets/img/logo-letter.png" alt="logo-letter" class="logo-letter">
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="profile-content">
-  <div class="profile-header">
-    <ion-avatar class="profile-avatar">
-      <img src="../../../assets/img/avatar.png" alt="Meu perfil">
-    </ion-avatar>
-    <h2>Olá, (nome)!</h2>
-  </div>
-
-  <div class="profile-info">
-    <ion-item lines="full">
-      <ion-label>Informações pessoais</ion-label>
-      <ion-icon name="add-circle-outline" slot="end"></ion-icon>
-    </ion-item>
-
-    <ion-item lines="full">
-      <ion-label>Meu endereço</ion-label>
-      <ion-icon name="add-circle-outline" slot="end"></ion-icon>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label>Notificações</ion-label>
-      <ion-toggle slot="end" checked></ion-toggle>
-    </ion-item>
-  </div>
-
-
-</ion-content> -->
-<!-- <ion-content>
-  <div class="profile-header">
-    <img src="assets/img/back-profile.png" alt="Background" />
-    <div class="profile-info">
-      <div class="profile-picture">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </div>
-      <h2>Meu perfil</h2>
-      <p>Olá, (nome)!</p>
-    </div>
-  </div>
-
-  <div class="profile-actions">
-    <ion-card>
-      <ion-card-content>
-        <div class="info-row" (click)="toggleInfo('personal')">
-          <p>Informações pessoais</p>
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-        <div *ngIf="expandedInfo === 'personal'" class="extra-info">
-          <p>- Nome: João Silva</p>
-          <p>- Idade: 25 anos</p>
-          <p>- CPF: XXX.XXX.XXX-XX</p>
-        </div>
-
-        <div class="info-row" (click)="toggleInfo('address')">
-          <p>Meu endereço</p>
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-        <div *ngIf="expandedInfo === 'address'" class="extra-info">
-          <p>- Rua: Rua Exemplo</p>
-          <p>- Bairro: Centro</p>
-          <p>- CEP: 12345-678</p>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card (click)="openHoursPopup()">
-      <ion-card-content class="hours">
-        <ion-icon name="time-outline"></ion-icon>
-        <p>49:00:00 horas realizadas</p>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-modal
-      [isOpen]="isModalOpen"
-      (ionModalDidDismiss)="onModalDismiss()"
-      [breakpoints]="[0.25, 0.5, 0.75]"
-      [initialBreakpoint]="0.5"
-    >
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Detalhes das Horas</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="closeModal()">Fechar</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-
-        <ion-content>
-          <div class="modal-content">
-            <ion-card *ngFor="let item of horas">
-              <ion-card-header>
-                <ion-card-title class="hours-title">
-                  {{ item.horas }} (grande preto)
-                </ion-card-title>
-              </ion-card-header>
-
-              <ion-card-content>
-                <div class="action-details">
-                  <span class="action-name">{{ item.acao }}</span>
-                  <ion-icon
-                    name="chevron-forward-outline"
-                    class="more-info-icon"
-                    (click)="showMoreInfo(item)"
-                  ></ion-icon>
-                </div>
-                <div class="company-name">{{ item.empresa }}</div>
-                <ion-item lines="none" class="separator"></ion-item>
-
-                <div *ngIf="item.showMore">
-                  <ion-button
-                    class="download-btn"
-                    (click)="downloadCertificado(item)"
-                  >
-                    Download Certificado
-                  </ion-button>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </div>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-
-    <ion-item>
-      <ion-label>Notificações</ion-label>
-      <ion-toggle></ion-toggle>
-    </ion-item>
-  </div>
-</ion-content> -->
-
-<!-- TESTEEEEEE -->
-<!-- <ion-content>
-  <div class="profile-header">
-    <img src="assets/img/back-profile.png" alt="Background" />
-    <div class="profile-info">
-      <div class="profile-picture">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </div>
-      <h2>Meu perfil</h2>
-      <p>Olá, (nome)!</p>
-    </div>
-  </div> -->
-
-<!-- Informações do usuário -->
-<!-- <div class="profile-actions">
-    <ion-card>
-      <ion-card-content>
-        <div class="info-row" (click)="toggleInfo('personal')">
-          <p>Informações pessoais</p>
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-        <div *ngIf="expandedInfo === 'personal'" class="extra-info">
-          <p>- Nome: João Silva</p>
-          <p>- Idade: 25 anos</p>
-          <p>- CPF: XXX.XXX.XXX-XX</p>
-        </div>
-
-        <div class="info-row" (click)="toggleInfo('address')">
-          <p>Meu endereço</p>
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-        <div *ngIf="expandedInfo === 'address'" class="extra-info">
-          <p>- Rua: Rua Exemplo</p>
-          <p>- Bairro: Centro</p>
-          <p>- CEP: 12345-678</p>
-        </div>
-      </ion-card-content>
-    </ion-card> -->
-
-<!-- Botão de horas realizadas -->
-<!-- <ion-card (click)="openHoursModal()">
-      <ion-card-content class="hours">
-        <ion-icon name="time-outline"></ion-icon>
-        <p>49:00:00 horas realizadas</p>
-      </ion-card-content>
-    </ion-card>
-  </div>
-</ion-content> -->
-
-<!-- Modal de Tela Cheia -->
-<!-- <ion-modal
-  [isOpen]="isHoursModalOpen"
-  (ionModalDidDismiss)="closeHoursModal()"
-  [breakpoints]="[0.5, 1]"
-  [initialBreakpoint]="1"
->
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Horas Realizadas</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="closeHoursModal()">Fechar</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <div class="hours-list">
-        <ion-card
-          *ngFor="let hora of horas"
-          (click)="openHourDetailModal(hora)"
-        >
-          <ion-card-content>
-            <div class="hour-details">
-              <p>{{ hora.empresa }}</p>
-              <p>{{ hora.horas }}</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </ion-content>
-  </ng-template>
-</ion-modal> -->
-
-<!-- Modal Pequeno para Detalhes de Cada Hora -->
-<!-- <ion-modal
-  [isOpen]="isHourDetailModalOpen"
-  (ionModalDidDismiss)="closeHourDetailModal()"
-  [breakpoints]="[0.25, 0.5]"
-  [initialBreakpoint]="0.5"
->
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Detalhes da Ação</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="closeHourDetailModal()">Fechar</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <div class="modal-details">
-        <h3>+{{ selectedHour?.horas }}</h3>
-        <p>{{ selectedHour?.acao }}</p>
-        <p>{{ selectedHour?.empresa }}</p>
-        <div class="time">
-          <p>Entrada: {{ selectedHour?.entrada }}</p>
-          <p>Saída: {{ selectedHour?.saida }}</p>
-        </div>
-        <ion-button (click)="downloadCertificado(selectedHour)">
-          Download do Certificado
-        </ion-button>
-      </div>
-    </ion-content>
-  </ng-template>
-</ion-modal> -->
-<!-- TESTE MAIS APAGINAS -->
 <ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
     <img
@@ -268,8 +13,8 @@
     />
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <!-- Cabeçalho com imagem de fundo -->
   <div class="profile-header">
     <img src="assets/img/back-profile.png" alt="Background" />
     <div class="profile-info">
@@ -277,11 +22,11 @@
         <ion-icon name="person-circle-outline"></ion-icon>
       </div>
       <h2>Meu perfil</h2>
-      <p>Olá, (nome)!</p>
+      <p>Olá, {{ user?.name }}!</p>
+      <!-- Nome do usuário dinâmico -->
     </div>
   </div>
 
-  <!-- Informações do usuário -->
   <div class="profile-actions">
     <ion-card>
       <ion-card-content>
@@ -290,32 +35,32 @@
           <ion-icon name="add-outline"></ion-icon>
         </div>
         <div *ngIf="expandedInfo === 'personal'" class="extra-info">
-          <p>- Nome: João Silva</p>
-          <p>- Idade: 25 anos</p>
-          <p>- CPF: XXX.XXX.XXX-XX</p>
+          <p>- Nome: {{ user?.name }}</p>
+          <p>- E-mail: {{ user?.email }}</p>
+          <p>- Telefone: {{ user?.phone }}</p>
         </div>
 
-        <!-- <ion-item-divider></ion-item-divider> -->
         <div class="separator"></div>
 
         <div class="info-row" (click)="toggleInfo('address')">
           <p>Meu endereço</p>
-          <ion-icon class="add-outline" name="add-outline"></ion-icon>
+          <ion-icon name="add-outline"></ion-icon>
         </div>
         <div *ngIf="expandedInfo === 'address'" class="extra-info">
-          <p>- Rua: Rua Exemplo</p>
-          <p>- Bairro: Centro</p>
-          <p>- CEP: 12345-678</p>
+          <p>- Rua: {{ user?.endereco?.road }}</p>
+          <p>- Bairro: {{ user?.endereco?.neighborhood }}</p>
+          <p>- CEP: {{ user?.endereco?.zipcode }}</p>
+          <p>- Estado: {{ user?.endereco?.state }}</p>
+          <p>- Cidade: {{ user?.endereco?.city }}</p>
         </div>
       </ion-card-content>
     </ion-card>
 
-    <!-- Total de horas -->
     <ion-card routerLink="/hours-detail">
       <ion-card-content class="hours">
         <ion-icon name="time-outline" class="time-outline"></ion-icon>
         <div class="hours-total">
-          <p class="total-hours">49:00:00</p>
+          <p class="total-hours">{{ user?.totalHours }} horas</p>
           <p class="estimated-hours">Estimativa de horas de voluntariado</p>
         </div>
       </ion-card-content>

@@ -24,18 +24,28 @@ import { UserRepository } from '../repositories/user.repository';
 
 @Injectable()
 export class UserService {
+  // findById(userId: string) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor(private readonly userRepository: UserRepository) {}
 
   async create(dto: CreateUserDto): Promise<UserEntity> {
-    // Se 'endereco' foi passado, armazena como objeto JSON
     const userPayload = {
       ...dto,
-      endereco: dto.endereco || null, // 'null' caso não tenha sido enviado
+      endereco: dto.endereco || null,
     };
 
-    // Use userPayload em vez de dto diretamente
-    const user = await this.userRepository.create(userPayload); // Agora estamos passando userPayload, não dto
+    const user = await this.userRepository.create(userPayload);
 
     return user;
+  }
+
+  async getUserDetails(userId: string) {
+    const user = await this.userRepository.findUnique(userId);
+    return user;
+  }
+
+  async findById(userId: string): Promise<UserEntity | null> {
+    return await this.userRepository.findUnique(userId);
   }
 }
