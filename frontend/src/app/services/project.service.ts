@@ -40,4 +40,8 @@ export class ProjectService {
   getProjectById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
+  subscribeToProject(projectId: string, userId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${projectId}/subscribe`, { userId });
+  }
 }

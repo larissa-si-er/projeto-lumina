@@ -60,8 +60,17 @@
       <ion-card-content class="hours">
         <ion-icon name="time-outline" class="time-outline"></ion-icon>
         <div class="hours-total">
-          <p class="total-hours">{{ user?.totalHours }} horas</p>
+          <p class="total-hours">{{ user?.totalHours }}:00:00</p>
           <p class="estimated-hours">Estimativa de horas de voluntariado</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card routerLink="/hours-detail">
+      <ion-card-content class="lg" (click)="logout()">
+        <div class="logout">
+          Sair
+          <ion-icon name="exit"></ion-icon>
         </div>
       </ion-card-content>
     </ion-card>

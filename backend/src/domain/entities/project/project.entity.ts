@@ -15,6 +15,7 @@ export class ProjectEntity {
   endDate?: string;
   startTime?: string;
   endTime?: string;
+  availableSpots?: number;
   totalSpots: number;
   description: string;
   hoursValue?: number;

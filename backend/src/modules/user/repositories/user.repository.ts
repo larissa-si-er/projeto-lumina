@@ -9,27 +9,9 @@ export class UserRepository extends RepositoryFactory<
   CreateUserDto,
   UpdateUserDto
 > {
-  // findUnique(arg0: { where: { id: string; }; }) {
-  //   throw new Error('Method not implemented.');
-  // }
-  // findOne(arg0: { where: { id: string } }) {
-  //   throw new Error('Method not implemented.');
-  // }
   constructor() {
     super('user');
   }
-
-  //   findAll(): Promise<UserEntity[]> {
-  //     return this.prismaService.user.findMany();
-  //   }
-
-  //   findById(id: string): Promise<UserEntity> {
-  //     return this.prismaService.user.findUnique({
-  //       where: {
-  //         id: id,
-  //       },
-  //     });
-  //   }
 
   //ALTERAÇOES
   async findByEmail(email: string): Promise<UserEntity | null> {

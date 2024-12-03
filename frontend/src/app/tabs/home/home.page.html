@@ -74,9 +74,7 @@
               <div class="volunteer-stat">
                 <div class="stat-icon disponivel">
                   <ion-icon name="person"></ion-icon>
-                  <span class="stat-number"
-                    >{{ project.totalSpots - project.filledSpots }}</span
-                  >
+                  <span class="stat-number">{{ project.availableSpots }}</span>
                 </div>
                 <span class="stat-label">Disponíveis</span>
               </div>
@@ -86,9 +84,9 @@
                 <ion-button
                   class="participate-button"
                   [routerLink]="'/volunteer-signup/' + project.id"
+                  (click)="presentConfirmationAlert(project.id)"
                 >
                   <ion-icon slot="start" name="hand-left-outline"></ion-icon>
-                  Participar
                 </ion-button>
               </div>
             </div>

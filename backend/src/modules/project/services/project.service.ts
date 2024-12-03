@@ -39,6 +39,8 @@ export class ProjectService {
     normalizedCreateProjectDto.startDate = formattedStartDate;
     normalizedCreateProjectDto.endDate = formattedEndDate;
 
+    const availableSpots = normalizedCreateProjectDto.totalSpots;
+
     try {
       const createdProject = await this.prisma.project.create({
         data: {
@@ -53,6 +55,7 @@ export class ProjectService {
           endTime: normalizedCreateProjectDto.endTime,
           totalSpots: normalizedCreateProjectDto.totalSpots,
           hoursValue: normalizedCreateProjectDto.hoursValue,
+          availableSpots,
           description: normalizedCreateProjectDto.description,
           mainImage:
             normalizedCreateProjectDto.mainImage || 'default_image_url',
@@ -172,5 +175,62 @@ export class ProjectService {
       ...project,
       skillsRequired: formattedSkills,
     };
+  }
+
+  async checkParticipant(projectId: string, userId: string) {
+    return this.prisma.projectParticipant.findFirst({
+      where: { projectId, userId },
+    });
+  }
+
+  async addParticipant(projectId: string, userId: string) {
+    // Buscar o projeto e suas horas
+    const project = await this.prisma.project.findUnique({
+      where: { id: projectId },
+    });
+
+    if (!project) {
+      throw new Error('Projeto não encontrado');
+    }
+
+    // Buscar o usuário
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    // Verificar se o usuário já está inscrito no projeto
+    const existingParticipation =
+      await this.prisma.projectParticipant.findFirst({
+        where: { projectId, userId },
+      });
+
+    if (existingParticipation) {
+      throw new Error('Usuário já está inscrito neste projeto');
+    }
+
+    // Adicionar o usuário ao projeto
+    await this.prisma.projectParticipant.create({
+      data: { projectId, userId },
+    });
+
+    // Acumular as horas do projeto no totalHours do usuário
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        totalHours: user.totalHours + project.hoursValue, // Somar as horas do projeto
+      },
+    });
+
+    // Atualizar a quantidade de vagas disponíveis
+    await this.prisma.project.update({
+      where: { id: projectId },
+      data: { availableSpots: { decrement: 1 } },
+    });
+
+    return { message: 'Usuário inscrito com sucesso e horas acumuladas' };
   }
 }

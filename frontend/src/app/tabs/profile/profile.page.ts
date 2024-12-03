@@ -1,18 +1,5 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-profile',
-//   templateUrl: './profile.page.html',
-//   styleUrls: ['./profile.page.scss'],
-// })
-// export class ProfilePage {
-//   expandedInfo: string = '';
-
-//   toggleInfo(section: string) {
-//     this.expandedInfo = this.expandedInfo === section ? '' : section;
-//   }
-// }
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
@@ -27,7 +14,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -45,5 +33,17 @@ export class ProfilePage implements OnInit {
   // Função para alternar entre informações expandidas
   toggleInfo(info: string) {
     this.expandedInfo = this.expandedInfo === info ? '' : info;
+  }
+
+  logout() {
+    this.authService
+      .logout()
+      .then(() => {
+        // Redirecionar para a página de login após o logout
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        console.error('Erro ao fazer logout', error);
+      });
   }
 }

@@ -136,7 +136,6 @@ export class AddProjectPage implements OnInit {
         next: (response) => {
           console.log('Projeto criado com sucesso:', response);
 
-          // Redireciona para a página Home após o sucesso da criação
           this.navController.navigateForward('/tabs');
         },
         error: (err) => console.error('Erro ao criar o projeto:', err),
